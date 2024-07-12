@@ -1,4 +1,4 @@
-import './loading-screen-style.css'
+/*import './loading-screen-style.css'*/
 
 function LoadingScreen() {
     return (
