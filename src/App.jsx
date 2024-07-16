@@ -1,14 +1,13 @@
 import './App.css'
 /*import LoadingScreen from './loading-screen/loading-screen.jsx'*/
-import Login from './components/login/login.jsx'
+/*import Login from './login/login.jsx'*/
+import InitialLogin from './login/login-screen.jsx'
 
 function App() {
     return(
-        <div className="App">
-            <Login/>
-        </div>
-    )
-       
+        <InitialLogin/>
+                     
+    )      
 }
 /*<LoadingScreen/>*/
 export default App

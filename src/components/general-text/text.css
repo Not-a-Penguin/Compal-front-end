@@ -1,0 +1,63 @@
+.general-text{
+    /* Entre em sua conta */
+
+width: 440px;
+height: 31px;
+
+/* Heading/H2 */
+font-family: 'DM Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 24px;
+line-height: 130%;
+/* or 31px */
+display: flex;
+align-items: flex-end;
+text-align: center;
+letter-spacing: -1px;
+
+/* Gray/Gray-9 */
+color: #212529;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+}
+
+.second-text{
+    /* Label */
+
+    width: 110px;
+    height: 11px;
+
+    /* Button/Large */
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 140%;
+/* or 22px */
+/* leading-trim and text-edge are draft CSS properties.
+
+Read more: https://drafts.csswg.org/css-inline-3/#leading-trim
+*/
+    leading-trim: both;
+    text-edge: cap;
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.5px;
+
+    color: #64A70B;
+
+
+/* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+
+}
+
