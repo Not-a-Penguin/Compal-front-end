@@ -2,7 +2,7 @@
 import './login.css';
 /*import ButtonPrimary from '../components/button-primary/button';*/;
 
-function Field({type,htmlFor,name,id,required,placeholder,variant,fullWidth, onChange,value}){
+function Field({type,htmlFor,name,id,required,placeholder,variant,onChange,value}){
 
   return(
     <div className='container'>
@@ -15,7 +15,7 @@ function Field({type,htmlFor,name,id,required,placeholder,variant,fullWidth, onC
         required={required}
         placeholder={placeholder}
         variant={variant}
-        fullWidth={fullWidth}
+      
         onChange={onChange}
         value={value}
         

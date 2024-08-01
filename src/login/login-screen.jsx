@@ -3,27 +3,45 @@ import BodyText from '../components/general-text/body-text.jsx';
 import Logo from '../components/logo/logo.jsx';
 import Field from '../components/fields/field.jsx';
 import IconC from '../components/logo/icon.jsx';
-import { useState } from 'react';
+/*import { useState } from 'react';*/
 import ButtonPrimary from '../components/button-primary/button';
-/*import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';*/
-/*import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';*/
-/*import '../components/fields/login.css';*/
+
+//import das rotas
+import { useEffect, useState } from 'react'
+import blogFetch  from '../components/config';
 
 function InitialLogin(){
+    //constante de post
+    const [posts,setPosts] = useState([]);
+    const getPosts = async() => {
+        try {
+            const response = await blogFetch.get ("/posts");
+            
+            /*const data = response.data;*/
+
+            /*setPosts(data);*/
+            console.log(response);
+        }   catch (error) {
+            console.log(error);
+            
+        }
+
+    };
+    useEffect(() => {
+        getPosts();
+    },[])
+
+    //constante de email e senha
     const [username,setUsername] = useState("");
     const [password, setPassword] = useState("");
-    /*const IconPassword = () =>{}*/
 
-    /*Ativada quando o formulario for preenchido e o botao "Enviar" acionado*/
+    //Ativada quando o formulario for preenchido e o botao "Enviar" acionado
     const handleSubmit = (event) => {
       event.preventDefault();
 
       console.log(`Usuario ${username} foi cadastrado com a senha: ${password}`);
       console.log("Envio");
-
-        const handleSubmit= (event) => {
-        event.preventDefault();
-      }
+        
     }
     return(
         <div>
@@ -34,7 +52,7 @@ function InitialLogin(){
             <Field type="email"name="email" required placeholder="E-mail" onChange={(e) => setUsername(e.target.value)}
             />
             
-            <Field type="password"name="password" variant="outilined" fullWidth required placeholder="Senha" onChange={(e) => setPassword(e.target.value)}
+            <Field type="password"name="password" variant="outilined" required placeholder="Senha" onChange={(e) => setPassword(e.target.value)}
             />
               
             <ButtonPrimary text="Entrar" action={handleSubmit}/>
