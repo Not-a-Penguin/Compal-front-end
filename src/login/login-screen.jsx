@@ -3,46 +3,46 @@ import BodyText from '../components/general-text/body-text.jsx';
 import Logo from '../components/logo/logo.jsx';
 import Field from '../components/fields/field.jsx';
 import IconC from '../components/logo/icon.jsx';
-/*import { useState } from 'react';*/
+import { useState } from 'react';
 import ButtonPrimary from '../components/button-primary/button';
 
 //import das rotas
-import { useEffect, useState } from 'react'
-import blogFetch  from '../components/config';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+/*import { useEffect, useState } from 'react'*/
+/*import blogFetch  from '../components/config';*/
 
 function InitialLogin(){
-    //constante de post
-    const [posts,setPosts] = useState([]);
-    const getPosts = async() => {
-        try {
-            const response = await blogFetch.get ("/posts");
-            
-            /*const data = response.data;*/
-
-            /*setPosts(data);*/
-            console.log(response);
-        }   catch (error) {
-            console.log(error);
-            
-        }
-
-    };
-    useEffect(() => {
-        getPosts();
-    },[])
-
     //constante de email e senha
     const [username,setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
-    //Ativada quando o formulario for preenchido e o botao "Enviar" acionado
-    const handleSubmit = (event) => {
+    //Ativada quando o formulario for preenchido e o botao "Enviar" acionado, agora é assíncrona.
+    const handleSubmit = async (event) => {
       event.preventDefault();
 
       console.log(`Usuario ${username} foi cadastrado com a senha: ${password}`);
       console.log("Envio");
-        
-    }
+      
+      //Dados do formulario
+      const userData = {
+        email: username,
+        password: password
+      };
+      
+      try {
+        // Fazendo a requisição POST
+        const response = await axios.post('https://jsonplaceholder.typicode.com/posts', userData);
+        console.log('Resposta:', response.data);
+
+        // Redirecionar para outra rota após o login bem-sucedido
+        navigate('/dashboard');
+      } catch (error) {
+        console.error('Erro ao enviar os dados:', error);
+      }
+    };
+
     return(
         <div>
             <Logo/>
@@ -55,16 +55,9 @@ function InitialLogin(){
             <Field type="password"name="password" variant="outilined" required placeholder="Senha" onChange={(e) => setPassword(e.target.value)}
             />
               
-            <ButtonPrimary text="Entrar" action={handleSubmit}/>
-            
+            <ButtonPrimary text="Entrar" action={handleSubmit}/>     
         </div>      
     )
 }     
           
 export default InitialLogin;
-
-/*<RemoveRedEyeIcon InputProps = {{
-            iconPassword:<IconPassword/>,
-            }}/>*/
-              
-
