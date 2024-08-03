@@ -1,4 +1,4 @@
-import '../fields/login.css'
+import '../form/login.css'
 
 /*manipular textos*/
 function BodyText(props){
