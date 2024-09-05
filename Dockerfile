@@ -1,20 +1,26 @@
 # build step
-FROM node:16.13.2-alpine as build
+FROM node:16
 LABEL authors="Eduardo"
 
-WORKDIR /app
-COPY package.json ./
-RUN npm install
-COPY . ./
 
+# Set the working directory to /app
+WORKDIR /app
+
+# Copy the package.json and package-lock.json to the working directory
+COPY ./package*.json ./
+
+# Install the dependencies
+RUN npm install
+
+# Copy the remaining application files to the working directory
+COPY . .
+
+# Build the application
 RUN npm run build
 
-# release step
-FROM nginx:1.21.5-alpine as release
 
-COPY --from=build /app/build /usr/share/nginx/html/
+# Expose port 3000 for the application
 EXPOSE 5173
 
-CMD ["nginx", "-g", "daemon off;"]
-
-ENTRYPOINT ["top", "-b"]
+# Start the application
+CMD [ "npm", "run", "start" ]
