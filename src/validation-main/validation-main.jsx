@@ -8,7 +8,7 @@ import HistoryScreen from "../history-screen/history-screen.jsx";
 
 export default function ValidationMain(){
 
-    const [currentMenu, setCurrentMenu] = useState('sidebar-2');
+    const [currentMenu, setCurrentMenu] = useState('sidebar-1');
 
     function updateMenu(screen){
         setCurrentMenu(screen)
