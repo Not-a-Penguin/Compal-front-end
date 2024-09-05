@@ -1,0 +1,80 @@
+.form-title-text{
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 100%;
+    leading-trim: both;
+    text-edge: cap;
+    color: #000000;
+}
+
+input::file-selector-button {
+    font-weight: bold;
+    color: #858585;
+    /*padding: 0.5em;*/
+    border: 0px;
+    /*border-radius: 5px;*/
+    border-style: solid;
+}
+
+
+.cte-validation-input {
+    /* Rectangle 37 */
+    box-sizing: border-box;
+    /*position: absolute;*/
+    width: 279px;
+    height: 54px;
+    /*left: 327px;*/
+    /*top: 123px;*/
+
+    border: 1px solid #D9D9D9;
+    border-radius: 5px;
+}
+
+.cte-validation-input::placeholder{
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 100%;
+    leading-trim: both;
+    text-edge: cap;
+    color: #858585;
+}
+
+.cte-dropdown{
+    /* Rectangle 40322 */
+
+    box-sizing: border-box;
+
+    /*position: absolute;*/
+    width: 249px;
+    height: 54px;
+    left: 330px;
+    top: 240px;
+    background-color: #F8F9FA;
+    border: 1px solid #D9D9D9;
+    border-radius: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 100%;
+    leading-trim: both;
+    text-edge: cap;
+    color: #858585;
+
+}
+
+.cte-validation-dropdown-text{
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 100%;
+    leading-trim: both;
+    text-edge: cap;
+    color: #858585;
+}

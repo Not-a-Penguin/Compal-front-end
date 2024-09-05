@@ -1,0 +1,74 @@
+/* Header */
+
+.validation-screen-header{
+    box-sizing: border-box;
+     /*Auto layout*/
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+
+
+    /*position: absolute;*/
+    height: 50px;
+    /*left: 285px;*/
+    /*right: 48px;*/
+    /*top: 0px;*/
+
+    border-bottom: 1.5px solid #64A70B;
+    margin-bottom: 22px;
+}
+
+/* logo */
+
+.header-text{
+    width: 310px;
+    height: 14px;
+
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 100%;
+
+    leading-trim: both;
+    text-edge: cap;
+
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+
+    color: #64A70B;
+}
+
+.validation-main-card{
+    /* Rectangle 40318 */
+    box-sizing: border-box;
+    /*position: absolute;*/
+    /*width: 1352px;*/
+    /*height: 881px;*/
+    /*left: 285px;*/
+    /*top: 72px;*/
+    display: flex;
+    flex-direction: row;
+    column-gap: 4vw;
+    flex-wrap: wrap;
+}
+
+.validation-autofilled-div{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin: 20px;
+    gap: 1vw;
+}
+
+.validation-autofilled-card{
+    border: 1px solid #64A70B;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-right: 1vw;
+}

@@ -1,0 +1,52 @@
+
+.button-sidebar:hover{
+    background-color: #64A70B;
+    width: 9vw;
+    margin-top: 10px;
+    /*padding-top: 10px;*/
+    cursor: pointer;
+}
+
+.button-sidebar{
+    display: block;
+    /*width: 180px;*/
+    width: 9vw;
+    height: 2vw;
+    /*gap: 0px;*/
+    border-radius: 10px;
+    border-color: #005919;
+    border-style: solid;
+    /*padding-top: 10px;*/
+    margin-top: 10px;
+    background-color: #005919;
+
+    font-family: 'Noto Sans', sans-serif;
+    font-style: normal;
+    font-weight: 200;
+    /*font-size: 18px;*/
+    line-height: 24px;
+    font-size: 0.8vw;
+    color: #FFFFFF;
+}
+
+.button-sidebar-active{
+    display: block;
+    /*width: 180px;*/
+    width: 9vw;
+    height: 2vw;
+    /*gap: 0px;*/
+    border-radius: 10px;
+    border-color: #005919;
+    border-style: solid;
+    /*padding-top: 10px;*/
+    margin-top: 10px;
+    background-color: #64A70B;
+
+    font-family: 'Noto Sans', sans-serif;
+    font-style: normal;
+    font-weight: 200;
+    /*font-size: 18px;*/
+    line-height: 24px;
+    font-size: 0.8vw;
+    color: #FFFFFF;
+}

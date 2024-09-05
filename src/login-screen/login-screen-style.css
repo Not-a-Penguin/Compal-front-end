@@ -1,0 +1,90 @@
+/* Login - 1 */
+
+html, body{
+    background: #F8F9FA !important;
+}
+
+.Login-main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* Gray/Gray-0 */
+}
+
+.horizontal-align{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.vertical-align{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo-text{
+    /* logo */
+
+    width: 66px;
+    height: 14px;
+
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 19px;
+    line-height: 100%;
+    leading-trim: both;
+    text-edge: cap;
+    color: #ADB5BD;
+}
+
+.bold-text{
+    font-family: 'DM Sans', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 130%;
+    /* or 31px */
+    letter-spacing: -1px;
+
+    /* Gray/Gray-9 */
+    color: #212529;
+    order: 0;
+    align-self: stretch;
+}
+
+.body-text{
+    font-family: 'DM Sans', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    /* identical to box height, or 24px */
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.5px;
+    color: #495057;
+}
+
+.text-button{
+    /* Label */
+    background:none;
+    border:none;
+    margin:0;
+    padding:0;
+    cursor: pointer;
+
+    /* Button/Large */
+    font-family: 'DM Sans', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 140%;
+    leading-trim: both;
+    text-edge: cap;
+    letter-spacing: -0.5px;
+    color: #64A70B;
+    padding-left: 8px;
+}

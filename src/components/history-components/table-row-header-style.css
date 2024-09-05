@@ -1,0 +1,15 @@
+.table-row-header{
+    /* Text */
+
+    width: 76px;
+    height: 18px;
+    /* Text xs/Medium */
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 18px;
+    /* identical to box height, or 150% */
+    color: #667085;
+
+}

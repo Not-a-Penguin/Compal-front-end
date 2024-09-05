@@ -1,0 +1,40 @@
+.history-screen-button{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    width: 120px;
+    height: 42.5px;
+    gap: 4px;
+
+    border-radius: 8px;
+    border-style: solid;
+    background-color: #FFFFFF;
+
+    /* Inside auto layout */
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+}
+
+.history-screen-button:hover{
+    cursor: pointer;
+}
+
+.history-screen-button-text{
+    /* Text */
+
+    width: 40px;
+    height: 20px;
+
+    /* Text sm/Medium */
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    /* identical to box height, or 143% */
+    color: #64A70B;
+
+}

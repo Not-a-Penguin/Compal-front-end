@@ -1,0 +1,22 @@
+.button-general{
+    /*align-items: center;*/
+    /*padding: 0px 24px;*/
+    width: 440px;
+    height: 54px;
+    background: #64A70B;
+    border-radius: 16px;
+    border-style: solid;
+
+    color: #FFFFFF;
+    font-family: 'DM Sans', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 140%;
+    leading-trim: both;
+    letter-spacing: -0.5px;
+}
+
+.button-general:hover{
+    cursor: pointer;
+}

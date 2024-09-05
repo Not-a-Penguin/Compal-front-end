@@ -1,0 +1,24 @@
+.history-modal-input{
+    /* Rectangle 34624287 */
+
+    /*position: absolute;*/
+    width: 150px;
+    height: 30px;
+
+    background: #EEEEEE;
+    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+}
+
+.history-modal-input-title{
+    /* Número de CTE */
+    /*width: 103px;*/
+    /*height: 18px;*/
+
+    font-family: 'DM Sans', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 18px;
+    color: #000000;
+}

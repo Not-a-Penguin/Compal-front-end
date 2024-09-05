@@ -1,0 +1,40 @@
+/* Logo */
+
+/*html, body {*/
+/*    background: #64A70B !important;*/
+/*}*/
+
+.loading-screen{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    height: 40vw;
+
+    /*overflow: auto;*/
+}
+
+.logo{
+    display: flex;
+    flex-direction: row;
+    padding: 0px;
+    gap: 11px;
+}
+
+.bank-card-double{
+    width: 40px;
+    height: 40px;
+    stroke: blue;
+}
+
+.text{
+    font-family: Roboto, serif;
+    font-size: 31.82px;
+    font-weight: 500;
+    line-height: 31.82px;
+    text-align: left;
+    /*color: #ADB5BD;*/
+    color: #FFFFFF;
+}
+
+

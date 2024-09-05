@@ -1,0 +1,37 @@
+.validation-button{
+    /* Group 1000004589 */
+
+    width: 150px;
+    height: 54px;
+    /*top: 868px;*/
+    /*left: 1459px;*/
+    gap: 0px;
+    border-radius: 5px;
+    margin: 20px;
+    background-color: #F8F9FA;
+    border-style: solid;
+}
+
+.validation-button:hover{
+    cursor: pointer;
+    /*background-color: #64A70B;*/
+}
+
+
+.validation-button-text{
+    /* logo */
+
+    /*position: absolute;*/
+    /*width: 81px;*/
+    /*height: 17px;*/
+
+    font-family: 'Noto Sans', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 100%;
+
+    leading-trim: both;
+    text-edge: cap;
+    color: #005919;
+}

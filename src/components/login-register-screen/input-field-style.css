@@ -1,0 +1,19 @@
+
+.input-field-style {
+    box-sizing: border-box;
+    width: 440px;
+    height: 52px;
+    background: #FFFFFF;
+    border: 1px solid #ADB5BD;
+    border-radius: 8px;
+}
+
+::placeholder{
+    font-family: 'DM Sans', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 100%;
+    /* Gray/Gray-7 */
+    color: #495057;
+}
