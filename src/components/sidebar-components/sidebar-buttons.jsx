@@ -10,7 +10,7 @@ export default function SidebarButton(props) {
                     display: 'flex',
                     flexDirection: 'row',
                     alignItems: 'center',
-                    gap: '10px'
+                    gap: '10px',
                 }}>
                     <img src={props.icon} alt={'icon'}/>
                     {props.text}
@@ -21,19 +21,17 @@ export default function SidebarButton(props) {
 
     else{
         return (
-            <button onClick={props.clicked} id={props.id}
-                    className={'button-sidebar'}>
+            <button onClick={props.clicked} id={props.id} className={'button-sidebar'}>
                 <div style={{
                     display: 'flex',
                     flexDirection: 'row',
                     alignItems: 'center',
-                    gap: '10px'
+                    gap: '10px',
                 }}>
                     <img src={props.icon} alt={'icon'}/>
                     {props.text}
                 </div>
             </button>
-
         )
     }
 }

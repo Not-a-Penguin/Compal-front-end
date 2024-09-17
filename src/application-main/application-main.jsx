@@ -1,12 +1,13 @@
-import './validation-main.css'
+import './application-main.css'
 
 import Sidebar from "./sidebar.jsx";
 import ValidationScreen from "../validation-screen/validation-screen.jsx";
 
 import {useState} from "react";
 import HistoryScreen from "../history-screen/history-screen.jsx";
+import BidScreen from "../bid-screen/bid-screen.jsx";
 
-export default function ValidationMain(){
+export default function ApplicationMain(){
 
     const [currentMenu, setCurrentMenu] = useState('sidebar-1');
 
@@ -22,6 +23,9 @@ export default function ValidationMain(){
         else if(menu === 'sidebar-2'){
             return <HistoryScreen/>
         }
+        else if(menu === 'sidebar-4'){
+            return <BidScreen/>
+        }
         else{
             return <div>Erro</div>
         }
@@ -33,11 +37,18 @@ export default function ValidationMain(){
             <Sidebar clicked={updateMenu} currentMenu={currentMenu}/>
             <div style={{
                 position: 'fixed',
-                left: '12vw',
-                paddingLeft: '10px',
-                paddingRight: '10px',
-                marginLeft: '5px',
-                height: '100%',
+                top: 0,
+                left: '10px',
+                right: 0,
+                bottom: 0,
+                // left: '12vw',
+                // width: '100px',
+                flex: '0 0 100%',
+                paddingLeft: '10vw',
+                paddingRight: '1vw',
+                paddingBottom: '1vw',
+                // marginLeft: '45%',
+                // height: '100%',
                 overflow: 'auto',
             }}>
             {checkWhichMenu(currentMenu)}

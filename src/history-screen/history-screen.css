@@ -38,7 +38,8 @@
     justify-content: space-evenly;
     border: 1px solid #64A70B;
     border-radius: 10px;
-    width: 80vw;
+    width: 98%;
+    padding: 1%;
 }
 
 .history-screen-table-header{

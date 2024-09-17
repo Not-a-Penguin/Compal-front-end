@@ -17,7 +17,7 @@ export default function LoginScreen() {
     }
 
     function signIn(){
-        return navigate("/validation");
+        return navigate("/main");
     }
 
     return (

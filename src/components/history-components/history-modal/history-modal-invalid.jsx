@@ -23,7 +23,7 @@ const style = {
 export default function HistoryModalInvalid(props){
     //TODO: fazer get pelo id para recuperar as notas associadas ao CTE
 
-    console.log("Inside invalid")
+    // console.log("Inside invalid")
 
     const [dadosNotaInvalido, setDadosNotaInvalido] = useState([]);
     const [divergencias, setDivergencias] = useState([])
@@ -63,89 +63,14 @@ export default function HistoryModalInvalid(props){
                 },
             ]
         }],
-        [{
-            "id": 2,
-            "N_cte": "56558",
-            "N_pedido": "MAS2401025",
-            "cliente": "SYNCREON SOLUCOES LOGISTICAS LTDA",
-            "valor_frete_pedido": "5.927,85 R$",
-            "valor_total_pedido": "2.398.508,64 R$",
-            "notas_fiscais": [
-                {
-                    "n_nota": 1982,
-                    "items":[
-                        {
-                            "quantidade": 21,
-                            "part_number": "72A10V31369",
-                            "descricao": "PLACA MAE HDL50 PN TRFM3",
-                            "valor_unitario": "1514.21 R$",
-                            "valor_total": "2.398.508,64 R$"
-                        }
-                    ]
-                }
-            ]
-        }],
-        [{
-            "id": 3,
-            "N_cte": "56557",
-            "N_pedido": "MCC2300206",
-            "cliente": "COMPAL TECNOLOGIA DO BRASIL LTDA",
-            "valor_frete_pedido": "19.733,81 R$",
-            "valor_total_pedido": "2.906.008,6 R$",
-            "notas_fiscais": [
-                {
-                    "n_nota": 1968,
-                    "items": [
-                        {
-                            "quantidade": 2645,
-                            "part_number": "721ATP32L71",
-                            "descricao": "CIRCUITO IMPRESSO COM COMPONENTES ELETRICOS OU ELETRONICOS, MONTADOS, DO TIPO PLACA SMALL BOARD MALDIVES6U PN M30615-205",
-                            "valor_unitario": "1.098,68 R$",
-                            "valor_total": "2.906.008,6 R$"
-                        }
-                    ]
-                }
-            ]
-        }],
-        [{
-            "id": 4,
-            "N_cte": "56570",
-            "N_pedido": "MAS2401026",
-            "cliente": "COMPAL TECNOLOGIA DO BRASIL LTDA",
-            "valor_frete_pedido": "5.927,85 R$",
-            "valor_total_pedido": "1.962.416,16 R$",
-            "notas_fiscais": [
-                {
-                    "n_nota": 1994,
-                    "items": [
-                        {
-                            "quantidade": 1296,
-                            "part_number": "72A10V31369",
-                            "descricao": "PLACA MAE HDL50 PN TRFM3",
-                            "valor_unitario": "1514.21 R$",
-                            "valor_total": "1.962.416,16 R$"
-                        }
-                    ]
-                }
-            ]
-        }]
     ]
 
     useEffect(() => {
         //axios.get .....
-        console.log("Inside use effect")
-        console.log("Inside use effect. Current id = ", props.id)
+        // console.log("Inside use effect")
+        // console.log("Inside use effect. Current id = ", props.id)
         if(props.id === 1){
             setDadosNotaInvalido(nota_falsa2[0])
-        }
-        if(props.id === 2){
-            setDadosNotaInvalido(nota_falsa2[1])
-        }
-        if(props.id === 3){
-            setDadosNotaInvalido(nota_falsa2[2])
-        }
-        if(props.id === 4){
-            setDadosNotaInvalido(nota_falsa2[3])
         }
 
         setDivergencias([

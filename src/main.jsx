@@ -1,11 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
-// import './index.css'
+import './index.css'
 import LoginScreen from "./login-screen/login-screen.jsx";
-import LoadingScreen from "./loading-screen/loading-screen.jsx";
+// import LoadingScreen from "./loading-screen/loading-screen.jsx";
 import RegisterScreen from "./register-screen/register-screen.jsx";
-import ValidationMain from "./validation-main/validation-main.jsx";
+import ApplicationMain from "./application-main/application-main.jsx";
 
 import {
     createBrowserRouter,
@@ -28,8 +28,8 @@ const router = createBrowserRouter([
         element: <RegisterScreen/>
     },
     {
-        path: "/validation",
-        element: <ValidationMain/>
+        path: "/main",
+        element: <ApplicationMain/>
     }
 ]);
 

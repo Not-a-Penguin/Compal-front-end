@@ -23,7 +23,8 @@ input::file-selector-button {
     /* Rectangle 37 */
     box-sizing: border-box;
     /*position: absolute;*/
-    width: 279px;
+    /*width: 280px;*/
+    width: 25vw;
     height: 54px;
     /*left: 327px;*/
     /*top: 123px;*/
@@ -56,7 +57,6 @@ input::file-selector-button {
     background-color: #F8F9FA;
     border: 1px solid #D9D9D9;
     border-radius: 5px;
-    font-family: 'Roboto', sans-serif;
     font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: 500;

@@ -8,7 +8,7 @@
     justify-content: space-between;
     align-items: center;
     gap: 8px;
-
+    width: 100%;
 
     /*position: absolute;*/
     height: 50px;
@@ -42,25 +42,22 @@
     color: #64A70B;
 }
 
-.validation-main-card{
+.validation-main-card-column{
     /* Rectangle 40318 */
     box-sizing: border-box;
-    /*position: absolute;*/
-    /*width: 1352px;*/
-    /*height: 881px;*/
-    /*left: 285px;*/
-    /*top: 72px;*/
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    /*justify-content: space-around;*/
+    /*align-items: start;*/
     column-gap: 4vw;
-    flex-wrap: wrap;
+    /*flex-wrap: wrap;*/
 }
 
 .validation-autofilled-div{
     display: flex;
     flex-direction: column;
     align-items: start;
-    margin: 20px;
+    /*margin: 20px;*/
     gap: 1vw;
 }
 
@@ -68,7 +65,54 @@
     border: 1px solid #64A70B;
     border-radius: 10px;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin-right: 1vw;
+    width: 100%;
+    flex-direction: column;
+    /*flex-wrap: wrap;*/
+    /*margin-right: 1vw;*/
+}
+
+.Toastify__toast--success {
+    border: 1px solid #3A9EA5 !important;
+    border-radius: 10px !important;
+    background: #34651B !important;
+}
+
+.Toastify__toast--success::before {
+    /*content: url("../assets/images/svg/successToast.svg");// Your svg Path*/
+position:relative;
+    z-index:100000;
+    left:12px;
+    top:6px;
+}
+
+.Toastify__toast--success::after {
+    /*content : url('../assets/images/svg/closeToast.svg');// Your svg Path*/
+position: absolute;
+    color: #333333;
+    font-size: 15px;
+    font-weight: 700;
+    left:265px;
+    padding-top: 14px !important;
+}
+
+.Toastify__toast--error {
+    border: 1px solid #EB5757;
+    border-radius: 10px !important;
+    background: #CA3A31 !important;
+}
+.Toastify__toast--error::after {
+    /*content : url('../assets/images/svg/closeToast.svg'); // Your svg Path*/
+position: absolute;
+    color: #333333;
+    font-size: 15px;
+    font-weight: 700;
+    left:265px;
+    padding-top: 14px !important;
+}
+.Toastify__toast--error::before {
+    /*content: url("../assets/images/svg/errorToast.svg");// Your svg Path*/
+position:relative;
+    z-index:100000;
+    left:12px;
+    top:6px;
 }

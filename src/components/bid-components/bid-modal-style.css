@@ -1,0 +1,103 @@
+.modal-section{
+    width: 100%;
+    border-bottom: 1px solid #005919;
+    padding-bottom: 4px;
+
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 100%;
+    /* or 18px */
+    /* leading-trim and text-edge are draft CSS properties.
+
+    Read more: https://drafts.csswg.org/css-inline-3/#leading-trim
+    */
+    leading-trim: both;
+    text-edge: cap;
+
+    color: #000000;
+}
+
+.bid-modal-section-row{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: left;
+    gap: 20px;
+    padding-bottom: 20px;
+}
+
+.bid-modal-input-title{
+    width: 100px;
+    height: 11px;
+
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    /* or 16px */
+    /* leading-trim and text-edge are draft CSS properties.
+
+    Read more: https://drafts.csswg.org/css-inline-3/#leading-trim
+    */
+    leading-trim: both;
+    text-edge: cap;
+    color: #000000;
+}
+
+.bid-modal-input{
+
+    box-sizing: border-box;
+    width: 100%;
+    height: 34px;
+    border: 1px solid #D0D0D0;
+    border-radius: 5px;
+
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    /* or 16px */
+    /* leading-trim and text-edge are draft CSS properties.
+
+    Read more: https://drafts.csswg.org/css-inline-3/#leading-trim
+    */
+    leading-trim: both;
+    text-edge: cap;
+    color: #494949;
+}
+
+.bid-save-button{
+    /* Rectangle 34624275 */
+
+    box-sizing: border-box;
+
+    /*position: absolute;*/
+    width: 100%;
+    height: 53px;
+
+    border: 1px solid #34651B;
+    border-radius: 5px;
+    background-color: white;
+
+    /* logo */
+    /*width: 77px;*/
+    /*height: 17px;*/
+
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 100%;
+    leading-trim: both;
+    text-edge: cap;
+
+    color: #000000;
+}
+
+.bid-save-button:hover{
+    cursor: pointer;
+}

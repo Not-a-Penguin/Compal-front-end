@@ -36,13 +36,14 @@ export default function TableRow(props) {
         }
     }
 
-    const N_pedido = props.data.N_pedido;
-    const N_cte = props.data.N_cte;
-    // const N_nota_fiscal = props.data.N_nota_fiscal;
-    const Valor_total_cte = props.data.Valor_total_cte;
-    const Local_coleta = props.data.Local_coleta;
-    const Local_destino = props.data.Local_destino;
-    const Status = props.data.Status;
+    const N_pedido = props.data.cte.numeroPedido;
+    const N_cte = props.data.cte.numeroCte;
+    const qtd_notas_fiscais = props.data.cte._count.nfe;
+    const valor_total_cte = props.data.cte.nfe[0].valortotal;
+    const transportadora = props.data.bid.transportadora.descricao;
+    const remetente = props.data.cte.remetente[0].nome;
+    const destinatario = props.data.cte.destinatario[0].nome;
+    const status = props.data.status;
     const id = props.data.id;
 
     return(
@@ -53,20 +54,23 @@ export default function TableRow(props) {
             <td>
                 {N_cte}
             </td>
-            {/*<td>*/}
-            {/*    {N_nota_fiscal}*/}
-            {/*</td>*/}
             <td>
-                {Valor_total_cte}
+                {transportadora}
             </td>
             <td>
-                {Local_coleta}
+                {qtd_notas_fiscais}
             </td>
             <td>
-                {Local_destino}
+                {valor_total_cte}
             </td>
             <td>
-                {renderButton(Status, id)}
+                {remetente}
+            </td>
+            <td>
+                {destinatario}
+            </td>
+            <td>
+                {renderButton(status, id)}
             </td>
         </tr>
     )

@@ -2,136 +2,147 @@ import './validation-screen-style.css'
 import CteValidationForm from "../components/validation-components/validation-form/cte-validation-form.jsx";
 import ValidationDropdown from "../components/validation-components/validation-form/validation-dropdown.jsx";
 import ValidationButton from "../components/validation-components/validation-button.jsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {ToastContainer, toast, Bounce} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+
+import axios from 'axios';
+axios.defaults.baseURL = 'http://localhost:5000';
 
 export default function ValidationScreen() {
 
-    const dadosValidacao = [
-        {
-            "n_pedido": "MAS2400484",
-            "CTE": "54681",
-            "transportadora": "Supersonic Logistica e Transportes LTDA",
-            "seguro": "NA",
-            "notal_fiscal": "761",
-            "peso_bruto": "24.5Kg",
-            "peso_cubado": "90.18m³",
-            "local_envio": "COMPALEAD ELETRONICA DO BRASIL INDUSTRIA E COMERCIO LTDA - " + "JAVARI, 1.055 - " + "DISTRITO INDUSTRIAL - " + "MANAUS - AM",
-            "local_coleta": "SYNCREON SOLUCOES LOGISTICAS LTDA - " + "AV. EMANCIPACAO,5000, 0 - " + "PARQUE DOS PINHEIROS - " + "HORTOLÂNDIA - SP"
-        },
-        {
-            "n_pedido": "MAS2401025",
-            "CTE": "56558",
-            "transportadora": "Supersonic Logistica e Transportes LTDA",
-            "seguro": "NA",
-            "notal_fiscal": "1969",
-            "peso_bruto": "560Kg",
-            "peso_cubado": "3353m³",
-            "local_envio": "COMPALEAD ELETRONICA DO BRASIL INDUSTRIA E COMERCIO LTDA - " + "JAVARI,1055 - LOTE 2.47 ECV" + "DISTRITO INDUSTRIAL" + "MANAUS - AM",
-            "local_coleta": "SYNCREON SOLUCOES LOGISTICAS LTDA - " + "AV. EMANCIPACAO, 5000,0 - " + "PARQUE DOS PINHEIROS - " + "HORTOLANDIA - SP"
-        },
-        {
-            "n_pedido": "MCC2300206",
-            "CTE": "56557",
-            "transportadora": "Supersonic Logistica e Transportes LTDA",
-            "seguro": "NA",
-            "notal_fiscal": "1968",
-            "peso_bruto": "2612Kg",
-            "peso_cubado": "15641m³",
-            "local_envio": "COMPALEAD ELETRONICA DO BRASIL INDUSTRIA E COMERCIO LTDA\n" +
-                "JAVARI,1055 - LOTE 2.47 ECV\n" +
-                "DISTRITO INDUSTRIAL\n" +
-                "MANAUS - AM",
-            "local_coleta": "COMPAL TECNOLOGIA DO BRASIL LTDA - " + "KANEBO,175 - GALPAOC4 C5 C6 E C12 - " + "DISTRITO INDUSTRIAL - " + "JUNDIAI - SP"
-        },
-        {
-            "n_pedido": "MAS2401026",
-            "CTE": "56570",
-            "transportadora": "Supersonic Logistica e Transportes LTDA",
-            "seguro": "NA",
-            "notal_fiscal": "1968",
-            "peso_bruto": "436Kg",
-            "peso_cubado": "2.611m³",
-            "local_envio": "COMPALEAD ELETRONICA DO BRASIL INDUSTRIA E COMERCIO LTDA\n" +
-                "JAVARI,1055 - LOTE 2.47 ECV\n" +
-                "DISTRITO INDUSTRIAL\n" +
-                "MANAUS - AM",
-            "local_coleta": "SYNCREON SOLUCOES LOGISTICAS LTDA\n" +
-                "AV. EMANCIPACAO,5000,0\n" +
-                "PARQUE DOS PINHEIROS\n" +
-                " HORTOLANDIA - SP"
-        },
-
-    ]
-
-
-    const transportadoras = ['Supersonic Logística e transportes LTDA', 'Brinks', 'EALE', 'IBL'];
+    // const transportadoras = ['Supersonic Logística e transportes LTDA', 'Brinks', 'EALE', 'IBL'];
     const tipoTransporte = ['Aéreo', 'Rodoviário', 'Multimodal'];
-    const tipoSeguro = ['NA', "DDR - Compal", "DDR - Transportadora"];
+    const operacao = ['D+1', 'D+2', 'D+3', 'D+4', 'D+5', 'D+6'];
+    // const tipoSeguro = ['NA', "DDR - Compal", "DDR - Transportadora"];
 
-    const [notaFiscal, setNotaFiscal] = useState("")
-    const [altura, setAltura] = useState("")
-    const [largura, setLargura] = useState("")
-    const [comprimento, setComprimento] = useState("")
     const [pesoBruto, setPesoBruto] = useState("")
     const [pesoCubado, setPesoCubado] = useState("")
-    const [localEnvio, setLocalEnvio] = useState("")
-    const [localColeta, setLocalColeta] = useState("")
+    const [notaFiscal, setNotaFiscal] = useState("")
+
+    const [enderecoRemetente, setEnderecoRemetente] = useState("")
+    const [remetenteComplemento, setRemetenteComplemento] = useState("")
+    const [remetenteBairro, setRemetenteBairro] = useState("")
+    const [remetenteCep, setRemetenteCep] = useState("")
+
+    const [destinatarioEndereco, setDestinatarioEndereco] = useState("")
+    const [destinatarioComplemento, setDestinatarioComplemento] = useState("")
+    const [destinatarioBairro, setDestinatarioBairro] = useState("")
+    const [destinatarioCep, setDestinatarioCep] = useState("")
+
+    const [transportadoras, setTransportadoras] = useState([]);
+    const [tipoSeguro, setTipoSeguro] = useState([]);
+    const [aeroportos, setAeroportos] = useState([])
+
+    useEffect(() => {
+        axios.get('/transportadoras').then((response) => {
+                // handle success
+                setTransportadoras(response.data)
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+            .finally(function () {
+                // always executed
+            });
+    }, []);
+
+    useEffect(() => {
+        axios.get('/seguros').then((response) => {
+            // handle success
+            setTipoSeguro(response.data)
+        })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+            .finally(function () {
+                // always executed
+            });
+    }, []);
+
+    useEffect(() => {
+        axios.get('/aeroportos').then((response) => {
+            // handle success
+            setAeroportos(response.data)
+        })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+            .finally(function () {
+                // always executed
+            });
+    }, []);
 
     function buttonCallback(){
 
+        const cteInput = document.getElementById('CTE').files[0];
 
-        console.log(document.getElementById("N_pedido").value)
+        const config = {
+            headers: {'Content-Type': 'text/xml'}
+        };
 
-        const n_pedido = document.getElementById("N_pedido").value;
+        axios.post('/',
+            {
+                cte: cteInput
+            }, config)
 
-        if(n_pedido === "MAS2400484"){
-            setNotaFiscal(dadosValidacao[0].notal_fiscal)
+
+        // if(n_pedido === "MAS2400484"){
+            // setNotaFiscal(dadosValidacao[0].notal_fiscal)
             // setAltura("1.2m")
             // setLargura("4m")
             // setComprimento("12m")
-            setPesoBruto(dadosValidacao[0].peso_bruto)
-            setPesoCubado(dadosValidacao[0].peso_cubado)
-            setLocalEnvio(dadosValidacao[0].local_envio)
-            setLocalColeta(dadosValidacao[0].local_coleta)
-            alert("CTE válido")
-        }
+            // setPesoBruto(dadosValidacao[0].peso_bruto)
+            // setPesoCubado(dadosValidacao[0].peso_cubado)
+            // setLocalEnvio(dadosValidacao[0].local_envio)
+            // setLocalColeta(dadosValidacao[0].local_coleta)
+            // alert("CTE válido")
+        // }
 
-        if(n_pedido === "MAS2401025"){
-            setNotaFiscal(dadosValidacao[1].notal_fiscal)
-            // setAltura("1.2m")
-            // setLargura("4m")
-            // setComprimento("12m")
-            setPesoBruto(dadosValidacao[1].peso_bruto)
-            setPesoCubado(dadosValidacao[1].peso_cubado)
-            setLocalEnvio(dadosValidacao[1].local_envio)
-            setLocalColeta(dadosValidacao[1].local_coleta)
-            alert("CTE válido")
-        }
+        toast.success(
+            <div style={{textAlign: 'left'}}>
+                <div>
+                    <div> </div>
+                    Salvo com sucesso. <br /><br />
+                </div>
+                <div>
+                    Sua requisição foi salva e você pode verificar na página de histórico.
+                </div>
+            </div>, {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: false,
+            progress: undefined,
+            theme: "colored",
+            transition: Bounce
+        })
 
-        if(n_pedido === "MCC2300206"){
-            setNotaFiscal(dadosValidacao[2].notal_fiscal)
-            // setAltura("1.2m")
-            // setLargura("4m")
-            // setComprimento("12m")
-            setPesoBruto(dadosValidacao[2].peso_bruto)
-            setPesoCubado(dadosValidacao[2].peso_cubado)
-            setLocalEnvio(dadosValidacao[2].local_envio)
-            setLocalColeta(dadosValidacao[2].local_coleta)
-            alert("CTE válido")
-        }
-
-        if(n_pedido === "MAS2401026"){
-            setNotaFiscal(dadosValidacao[3].notal_fiscal)
-            setPesoBruto(dadosValidacao[3].peso_bruto)
-            setPesoCubado(dadosValidacao[3].peso_cubado)
-            setLocalEnvio(dadosValidacao[3].local_envio)
-            setLocalColeta(dadosValidacao[3].local_coleta)
-            alert("CTE inválido")
-        }
-
-
-        // console.log(document.getElementById("nota_fiscal"))
+        toast.error(
+            <div style={{textAlign: 'left'}}>
+                <div>
+                    Algo está errado.<br /><br />
+                </div>
+                <div>
+                    Verifique seus dados e tente novamente.
+                </div>
+            </div>, {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: false,
+                progress: undefined,
+                theme: "colored",
+                transition: Bounce
+            })
     }
 
     return(
@@ -149,33 +160,79 @@ export default function ValidationScreen() {
                 border: "1px solid #64A70B",
                 borderRadius: "10px",
             }}>
-                <div className={'validation-main-card'}>
-                    <CteValidationForm title={"Número do pedido"} placeholder={"Digite o número do pedido"} disabled={false} id={"N_pedido"}/>
-                    <CteValidationForm title={"CTE"} placeholder={"Selecione um arquivo"} disabled={false} inputType={"file"} id={"N_CTE"}/>
-                </div>
-                <div className={'validation-main-card'}>
-                    <ValidationDropdown title={"Transportadora"} dropdownData={transportadoras} id={"id_transportadora"}/>
-                    <ValidationDropdown title={"Tipo de Transporte"} dropdownData={tipoTransporte} id={"id_tipo_transportadora"}/>
-                    <ValidationDropdown title={"Tipo de Seguro"} dropdownData={tipoSeguro} id={"tipo_seguro"}/>
-                </div>
+                <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around'}}>
+                    <div className={'validation-main-card-column'}>
+                        <CteValidationForm title={"Número do pedido"} placeholder={"Informação auto-preenchida"} disabled={true} id={"N_pedido"}/>
+                        <ValidationDropdown title={"Transportadora"} dropdownData={transportadoras} id={"id_transportadora"}/>
+                    </div>
 
-                <div className={'validation-autofilled-div'}>
-                    <div className={'form-title-text'}>
-                        Informações auto-preenchidas
+                    <div className={'validation-main-card-column'}>
+                        <CteValidationForm title={"CTE"} placeholder={"Selecione um arquivo"} disabled={false} inputType={"file"} id={"CTE"}/>
+                        <ValidationDropdown title={"Tipo de Transporte"} dropdownData={tipoTransporte} id={"id_tipo_transportadora"}/>
                     </div>
-                    <div className={'validation-autofilled-card'}>
-                            <CteValidationForm title={"Nota Fiscal"} placeholder={"-"} disabled={true} id={'nota_fiscal'} value={notaFiscal}/>
-                            {/*<CteValidationForm title={"Altura"} placeholder={"-"} disabled={true} value={altura}/>*/}
-                            {/*<CteValidationForm title={"Largura"} placeholder={"-"} disabled={true} value={largura}/>*/}
-                            {/*<CteValidationForm title={"Comprimento"} placeholder={"-"} disabled={true} value={comprimento}/>*/}
-                            <CteValidationForm title={"Peso bruto"} placeholder={"-"} disabled={true} value={pesoBruto}/>
-                            <CteValidationForm title={"Peso cubado"} placeholder={"-"} disabled={true} value={pesoCubado}/>
-                            <CteValidationForm title={"Local de envio"} placeholder={"-"} disabled={true} value={localEnvio}/>
-                            <CteValidationForm title={"Local de coleta"} placeholder={"-"} disabled={true} value={localColeta}/>
+                    <div className={'validation-main-card-column'}>
+                        <ValidationDropdown title={"Tipo de operação (D+)"} dropdownData={operacao} id={"operacao"}/>
+                        <ValidationDropdown title={"Tipo de Seguro"} dropdownData={tipoSeguro} id={"tipo_seguro"}/>
                     </div>
                 </div>
-                <ValidationButton buttonCallback={buttonCallback}/>
+                    <ValidationDropdown title={"Aeroporto de destino"} dropdownData={aeroportos} id={"aeroporto_destino"}/>
             </div>
+
+            <ValidationButton buttonCallback={buttonCallback}/>
+
+            <div className={'validation-autofilled-div'}>
+                <div className={'form-title-text'}>
+                    Informações auto-preenchidas
+                </div>
+                <div className={'validation-autofilled-card'}>
+                    <div style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                    }}>
+                        <CteValidationForm title={"Nota Fiscal"} placeholder={"-"} disabled={true} id={'nota_fiscal'} value={notaFiscal}/>
+                        <CteValidationForm title={"Peso bruto"} placeholder={"-"} disabled={true} value={pesoBruto}/>
+                        <CteValidationForm title={"Peso cubado"} placeholder={"-"} disabled={true} value={pesoCubado}/>
+                    </div>
+
+                    <div style={{
+                        display: 'flex',
+                        flexDirection: "row",
+                        // alignItems: 'stretch'
+                        justifyContent: 'space-around'
+                    }}>
+                        <div style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                        }}>
+                            <CteValidationForm title={"Endereço de remetente"} placeholder={'-'} disabled={true} id={'endereco_remetente'} value={enderecoRemetente}/>
+                            <CteValidationForm title={"Complemento"} placeholder={"-"} disabled={true} id={'complemento_remetente'} value={remetenteComplemento}/>
+                            <CteValidationForm title={"Bairro"} placeholder={"-"} disabled={true} id={'bairro_remetente'} value={remetenteBairro}/>
+                            <CteValidationForm title={"CEP"} placeholder={"-"} disabled={true} id={'cep_remetente'} value={remetenteCep}/>
+                        </div>
+                        <div>
+                            <CteValidationForm title={"Endereço de destinatário"} placeholder={'-'} disabled={true} id={'endereco_destinatario'} value={destinatarioEndereco}/>
+                            <CteValidationForm title={"Complemento"} placeholder={"-"} disabled={true} id={'complemento_remetente'} value={destinatarioComplemento}/>
+                            <CteValidationForm title={"Bairro"} placeholder={"-"} disabled={true} id={'bairro_remetente'} value={destinatarioBairro}/>
+                            <CteValidationForm title={"CEP"} placeholder={"-"} disabled={true} id={'cep_remetente'} value={destinatarioCep}/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <ToastContainer
+                position="bottom-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss={false}
+                draggable={false}
+                pauseOnHover
+                theme="colored"
+                transition: Bounce
+            />
         </div>
     )
 }
