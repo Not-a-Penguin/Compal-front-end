@@ -38,11 +38,13 @@ export default function HistoryScreen(){
     const handleClose = () => setOpen(false);
 
     function buttonStatus(Status, id){
-        // console.log("Id current = ", id);
+        console.log("Id current = ", id);
         if(Status === "Inválido"){
+            console.log("invalid")
             setCurrentStatus("Inválido");
         }
         else{
+            console.log("valid")
             setCurrentStatus("Válido");
         }
         setCurrentId(id);

@@ -8,7 +8,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 import axios from 'axios';
-axios.defaults.baseURL = 'http://localhost:5000';
+axios.defaults.baseURL = 'http://192.168.195.197:3333';
+axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
 export default function ValidationScreen() {
 
@@ -36,7 +37,7 @@ export default function ValidationScreen() {
     const [aeroportos, setAeroportos] = useState([])
 
     useEffect(() => {
-        axios.get('/transportadoras').then((response) => {
+        axios.get('/selecttransportadora').then((response) => {
                 // handle success
                 setTransportadoras(response.data)
             })
@@ -50,8 +51,9 @@ export default function ValidationScreen() {
     }, []);
 
     useEffect(() => {
-        axios.get('/seguros').then((response) => {
+        axios.get('/selectseguros').then((response) => {
             // handle success
+            // console.log(response.data)
             setTipoSeguro(response.data)
         })
             .catch(function (error) {
@@ -64,7 +66,7 @@ export default function ValidationScreen() {
     }, []);
 
     useEffect(() => {
-        axios.get('/aeroportos').then((response) => {
+        axios.get('/selectdestino').then((response) => {
             // handle success
             setAeroportos(response.data)
         })
@@ -81,14 +83,41 @@ export default function ValidationScreen() {
 
         const cteInput = document.getElementById('CTE').files[0];
 
+        // const cteText = new DOMParser().parseFromString(cteInput, 'text/xml')
+
+        // var XMLParser = require('react-xml-parser')
+        // var xml = new XMLParser().parseFromString(cteInput);    // Assume xmlText contains the example XML
+        // console.log(xml);
+        // console.log(xml.getElementsByTagName('Name'));
+
+        // console.log("CTE text")
+        console.log(document.getElementById('CTE').files[0])
+
         const config = {
-            headers: {'Content-Type': 'text/xml'}
+            headers: {'Content-Type': 'multipart/form-data'}
         };
 
-        axios.post('/',
+        axios.post('/dadosvalidacao',
             {
-                cte: cteInput
-            }, config)
+                operacao: document.getElementById("operacao").value,
+                aeroportoDestino: document.getElementById("aeroporto_destino").value,
+                seguro: document.getElementById("tipo_seguro").value,
+                tipoTransporte: document.getElementById("tipo_transportadora").value,
+                transportadora: document.getElementById("transportadora").value,
+                cte: document.getElementById("CTE").files[0],
+            }, config).then(function (response) {
+                console.log(response);
+             })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+        // axios.post('/bid').then(function (response) {
+        //         console.log(response);
+        //      })
+        //     .catch(function (error) {
+        //         console.log(error);
+        //     });
 
 
         // if(n_pedido === "MAS2400484"){
@@ -163,12 +192,12 @@ export default function ValidationScreen() {
                 <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around'}}>
                     <div className={'validation-main-card-column'}>
                         <CteValidationForm title={"Número do pedido"} placeholder={"Informação auto-preenchida"} disabled={true} id={"N_pedido"}/>
-                        <ValidationDropdown title={"Transportadora"} dropdownData={transportadoras} id={"id_transportadora"}/>
+                        <ValidationDropdown title={"Transportadora"} dropdownData={transportadoras} id={"transportadora"}/>
                     </div>
 
                     <div className={'validation-main-card-column'}>
                         <CteValidationForm title={"CTE"} placeholder={"Selecione um arquivo"} disabled={false} inputType={"file"} id={"CTE"}/>
-                        <ValidationDropdown title={"Tipo de Transporte"} dropdownData={tipoTransporte} id={"id_tipo_transportadora"}/>
+                        <ValidationDropdown title={"Tipo de Transporte"} dropdownData={tipoTransporte} id={"tipo_transportadora"}/>
                     </div>
                     <div className={'validation-main-card-column'}>
                         <ValidationDropdown title={"Tipo de operação (D+)"} dropdownData={operacao} id={"operacao"}/>

@@ -7,6 +7,7 @@ import Box from "@mui/material/Box";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import HistoryModalAccordion from "./history-modal-accordion-tables/history-modal-accordion.jsx";
 import HistoryModalInput from "./history-modal-input.jsx";
+import axios from "axios";
 
 const style = {
     position: 'absolute',
@@ -25,64 +26,17 @@ export default function HistoryModalValid(props){
 
     const [dadosNota, setDadosNota] = useState([]);
 
-    const nota_falsa = [
-        [{
-            "id": 1,
-            "N_cte": "54681",
-            "N_pedido": "MAS2400484",
-            "cliente": "SYNCREON SOLUCOES LOGISTICAS LTDA",
-            "valor_frete_pedido": "559.615,14 R$",
-            "valor_total_pedido": "34.615,14 R$",
-            "notas_fiscais": [
-                {
-                    "n_nota": 761,
-                    "items": [
-                        {
-                            "quantidade": 21,
-                            "part_number": "72A15L31415",
-                            "descricao": "PLACA MAE IDH50 PN 5710J",
-                            "valor_unitario": "1.648,34 R$",
-                            "valor_total": "34.615,14 R$"
-                        }
-                    ]
-                },
-                {
-                    "n_nota": 7444,
-                    "items": [
-                        {
-                            "quantidade": 21,
-                            "part_number": "72A15L31415",
-                            "descricao": "PLACA MAE IDH50 PN 5710J",
-                            "valor_unitario": "1.648,34 R$",
-                            "valor_total": "34.615,14 R$"
-                        }
-                    ]
-                },
-            ]
-        }],
-    ]
-
     useEffect(() => {
 
-        //axios.get .....
-        console.log("Inside use effect. Current id = ", props.id)
-        if(props.id === 1){
-            setDadosNota(nota_falsa[0])
-        }
-        if(props.id === 2){
-            setDadosNota(nota_falsa[1])
-        }
-        if(props.id === 3){
-            setDadosNota(nota_falsa[2])
-        }
-        if(props.id === 4){
-            setDadosNota(nota_falsa[3])
-        }
-        // console.log(dadosNota)
+        axios.get(`/validacao/${props.id}`).then((response) => {
+            // console.log(response.data)
+            setDadosNota(response.data[0])
+            // console.log(response)
+        });
 
     },[props.id]);
 
-    if(dadosNota[0]){
+    if(dadosNota){
         return(
             <div>
                 <Modal
@@ -95,20 +49,20 @@ export default function HistoryModalValid(props){
                         <div className={'modal-valid-header'}>
                             <img src={'/src/assets/box.svg'}/>
                             <div>
-                                Detalhes do CTE {dadosNota[0].N_cte}
+                                Detalhes do CTE {dadosNota.N_cte}
                             </div>
                         </div>
                         <div className={'modal-valid-body'}>
                             <div className={'modal-valid-body-aligner1'}>
-                                <HistoryModalInput title={"Número do CTE"} value={dadosNota[0].N_cte}/>
-                                <HistoryModalInput title={"Valor do frete"} value={dadosNota[0].valor_frete_pedido}/>
+                                <HistoryModalInput title={"Número do CTE"} value={dadosNota.N_cte}/>
+                                <HistoryModalInput title={"Valor do frete"} value={dadosNota.valor_frete_pedido}/>
                             </div>
                             <div className={'modal-valid-body-aligner1'}>
-                                <HistoryModalInput title={"Número do pedido"} value={dadosNota[0].N_pedido}/>
-                                <HistoryModalInput title={"Valor total do pedido"} value={dadosNota[0].valor_total_pedido}/>
+                                <HistoryModalInput title={"Número do pedido"} value={dadosNota.N_pedido}/>
+                                <HistoryModalInput title={"Valor total do pedido"} value={dadosNota.valor_total_pedido}/>
                             </div>
                             <div className={'modal-valid-body-aligner1'}>
-                                <HistoryModalInput title={"Cliente"} value={dadosNota[0].cliente}/>
+                                <HistoryModalInput title={"Cliente"} value={dadosNota.cliente}/>
                                 <div style={{visibility: 'hidden'}}>
                                     <HistoryModalInput title={"Invisible"}/>
                                 </div>
@@ -125,7 +79,7 @@ export default function HistoryModalValid(props){
                                     </Tab>
                                 </TabList>
                                 <TabPanel>
-                                    {dadosNota ? <HistoryModalAccordion data={dadosNota[0].notas_fiscais}/> : <div>banana</div>}
+                                    {dadosNota ? <HistoryModalAccordion data={dadosNota.notas_fiscais} transportadora = {dadosNota.transportadora}/> : <div></div>}
                                 </TabPanel>
                             </Tabs>
                         </div>
@@ -141,59 +95,39 @@ export default function HistoryModalValid(props){
     }
 }
 
-// setDadosNota(nota_falsa)
-// setDadosNota([
-//     {
-//         "id": 12,
-//         "items": [
+// const nota_falsa = [
+//     [{
+//         "id": 1,
+//         "N_cte": "54681",
+//         "N_pedido": "MAS2400484",
+//         "cliente": "SYNCREON SOLUCOES LOGISTICAS LTDA",
+//         "valor_frete_pedido": "559.615,14 R$",
+//         "valor_total_pedido": "34.615,14 R$",
+//         "notas_fiscais": [
 //             {
-//                 "quantidade": 2,
-//                 "part_number": "AS2173123",
-//                 "descricao": "Pasta de solda",
-//                 "valor_unitario": 150.4,
-//                 "total": 4560
-//             }
-//         ]
-//     },
-//     {
-//         "id": 34,
-//         "items": [
-//             {
-//                 "quantidade": 3,
-//                 "part_number": "BS2173123",
-//                 "descricao": "solda",
-//                 "valor_unitario": 250.4,
-//                 "total": 5560
+//                 "n_nota": 761,
+//                 "items": [
+//                     {
+//                         "quantidade": 21,
+//                         "part_number": "72A15L31415",
+//                         "descricao": "PLACA MAE IDH50 PN 5710J",
+//                         "valor_unitario": "1.648,34 R$",
+//                         "valor_total": "34.615,14 R$"
+//                     }
+//                 ]
 //             },
 //             {
-//
-//                 "quantidade": 3,
-//                 "part_number": "BS2173123",
-//                 "descricao": "solda",
-//                 "valor_unitario": 250.4,
-//                 "total": 5560
-//             }
-//         ]
-//     },
-//     {
-//         "id": 56,
-//         "items": [
-//             {
-//                 "nome" : "item 2",
-//                 "quantidade": 3,
-//                 "part_number": "BS2173123",
-//                 "descricao": "solda",
-//                 "valor_unitario": 250.4,
-//                 "total": 5560
+//                 "n_nota": 7444,
+//                 "items": [
+//                     {
+//                         "quantidade": 21,
+//                         "part_number": "72A15L31415",
+//                         "descricao": "PLACA MAE IDH50 PN 5710J",
+//                         "valor_unitario": "1.648,34 R$",
+//                         "valor_total": "34.615,14 R$"
+//                     }
+//                 ]
 //             },
-//             {
-//                 "nome": "item 3",
-//                 "quantidade": 3,
-//                 "part_number": "BS2173123",
-//                 "descricao": "solda",
-//                 "valor_unitario": 250.4,
-//                 "total": 5560
-//             }
 //         ]
-//     }
-// ])
+//     }],
+// ]

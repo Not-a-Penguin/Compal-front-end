@@ -8,17 +8,11 @@ import './history-modal-accordion.css'
 
 export default function HistoryModalAccordion(props) {
 
-
-    // console.log(props.data)
-
     if(props.data){
-        // console.log("Hello");
-        // console.log(props.data);
         const notasFiscais = [];
         props.data.forEach((element) => {
             notasFiscais.push(element);
         });
-        // console.log(pedidos);
 
         return(
             <div>
@@ -35,7 +29,7 @@ export default function HistoryModalAccordion(props) {
                             </div>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <HistoryModalAccordionTable data={nota.items}/>
+                            <HistoryModalAccordionTable data={nota.items} transportadora={props.transportadora}/>
                         </AccordionDetails>
                     </Accordion>
                     )

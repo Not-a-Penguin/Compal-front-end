@@ -22,14 +22,18 @@ export default function LoginScreen() {
 
     return (
         <div className={"login-main"}>
-            <img src={'src/assets/compal-logo.svg'} alt={"compal-logo"}/>
+            <div className={'vertical-align'}>
+                <img src={'src/assets/compal-logo.svg'} alt={"compal-logo"}/>
+            </div>
 
             <div className={'horizontal-align'} style={{paddingTop: '46px', paddingBottom: '20px'}}>
                 <img className={'credit-card'} src={'src/assets/credit-card-grey.svg'} alt={"credit-card"}/>
                 <DefaultText style={'logo-text'} text={"Compal"}/>
             </div>
 
-            <DefaultText style={'bold-text'} text={'Entre em sua conta'}/>
+            <div className={'vertical-align'}>
+                <DefaultText style={'bold-text-login'} text={'Entre em sua conta'}/>
+            </div>
 
             <div className={'horizontal-align'} style={{padding: '64'}}>
                 <DefaultText style={'body-text'} text={"Novo por aqui?"}/>
@@ -39,10 +43,8 @@ export default function LoginScreen() {
             <div className={'vertical-align'} style={{paddingTop: '30px'}}>
                 <InputField placeholder={"Email"} type={"email"}/>
                 <InputField placeholder={"Senha"} type={"password"}/>
+                <Button text={"Entrar"} onClick={signIn}/>
             </div>
-
-            <Button text={"Entrar"} onClick={signIn}/>
-
         </div>
     )
 }

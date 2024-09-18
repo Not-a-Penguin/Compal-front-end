@@ -2,8 +2,6 @@ import './history-modal-accordion.css'
 
 export default function HistoryModalAccordionTable(props){
 
-    console.log(props.data)
-
     return(
         <div>
             <div className={'regular-modal-text'}>Itens do pedido</div>
@@ -51,8 +49,8 @@ export default function HistoryModalAccordionTable(props){
                     </tbody>
                 </table>
             </div>
-            <div className={'regular-modal-text'}>Data do pedido:</div>
-            <div className={'regular-modal-text'}>Transportadora:</div>
+            {/*<div className={'regular-modal-text'}>Data do pedido:</div>*/}
+            <div className={'regular-modal-text'}>Transportadora: {props.transportadora}</div>
         </div>
     )
 }

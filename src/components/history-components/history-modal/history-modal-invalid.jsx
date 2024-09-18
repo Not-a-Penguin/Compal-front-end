@@ -5,6 +5,7 @@ import {useEffect, useState} from "react";
 import Box from "@mui/material/Box";
 import HistoryModalAccordion from "./history-modal-accordion-tables/history-modal-accordion.jsx";
 import DivergenceTable from "./divergence-table.jsx";
+import axios from "axios";
 
 const style = {
     position: 'absolute',
@@ -66,24 +67,23 @@ export default function HistoryModalInvalid(props){
     ]
 
     useEffect(() => {
-        //axios.get .....
-        // console.log("Inside use effect")
-        // console.log("Inside use effect. Current id = ", props.id)
-        if(props.id === 1){
-            setDadosNotaInvalido(nota_falsa2[0])
-        }
 
-        setDivergencias([
-            {
-                "divergencia": "Peso cubado",
-                "valor_esperado": "2611m³",
-                "valor_CTE": "2000m³",
-            },
-        ]);
+        axios.get(`/validacao/${props.id}`).then((response) => {
+            // console.log(response.data)
+            setDadosNotaInvalido(response.data[0])
+            // console.log(response)
+        });
 
-    }, [props.id]);
+        axios.get(`/divergencias/validacao/${props.id}`).then((response) => {
+            // console.log(response.data)
+            setDivergencias(response.data)
+            // console.log(response)
+        });
 
-    if(dadosNotaInvalido[0]){
+    },[props.id]);
+
+
+    if(dadosNotaInvalido){
         return(
             <div>
                 <Modal
@@ -96,20 +96,20 @@ export default function HistoryModalInvalid(props){
                         <div className={'modal-valid-header'}>
                             <img src={'/src/assets/box-invalid.svg'}/>
                             <div>
-                                Detalhes do CTE {dadosNotaInvalido[0].N_cte}
+                                Detalhes do CTE {dadosNotaInvalido.N_cte}
                             </div>
                         </div>
                         <div className={'modal-valid-body'}>
                             <div className={'modal-valid-body-aligner1'}>
-                                <HistoryModalInput title={"Número do CTE"} value={dadosNotaInvalido[0].N_cte}/>
-                                <HistoryModalInput title={"Valor do frete"} value={dadosNotaInvalido[0].valor_frete_pedido}/>
+                                <HistoryModalInput title={"Número do CTE"} value={dadosNotaInvalido.N_cte}/>
+                                <HistoryModalInput title={"Valor do frete"} value={dadosNotaInvalido.valor_frete_pedido}/>
                             </div>
                             <div className={'modal-valid-body-aligner1'}>
-                                <HistoryModalInput title={"Número do pedido"} value={dadosNotaInvalido[0].N_pedido}/>
-                                <HistoryModalInput title={"Valor total do pedido"} value={dadosNotaInvalido[0].valor_total_pedido}/>
+                                <HistoryModalInput title={"Número do pedido"} value={dadosNotaInvalido.N_pedido}/>
+                                <HistoryModalInput title={"Valor total do pedido"} value={dadosNotaInvalido.valor_total_pedido}/>
                             </div>
                             <div className={'modal-valid-body-aligner1'}>
-                                <HistoryModalInput title={"Cliente"} value={dadosNotaInvalido[0].cliente}/>
+                                <HistoryModalInput title={"Cliente"} value={dadosNotaInvalido.cliente}/>
                                 <div style={{visibility: 'hidden'}}>
                                     <HistoryModalInput title={"Invisible"}/>
                                 </div>
@@ -131,7 +131,7 @@ export default function HistoryModalInvalid(props){
                                     </Tab>
                                 </TabList>
                                 <TabPanel>
-                                    {dadosNotaInvalido ? <HistoryModalAccordion data={dadosNotaInvalido[0].notas_fiscais}/> : <></>}
+                                    {dadosNotaInvalido ? <HistoryModalAccordion data={dadosNotaInvalido.notas_fiscais} transportadora = {dadosNotaInvalido.transportadora}/> : <></>}
                                 </TabPanel>
                                 <TabPanel>
                                     <DivergenceTable divergencias={divergencias}/>

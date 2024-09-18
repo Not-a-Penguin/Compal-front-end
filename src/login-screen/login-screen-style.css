@@ -5,18 +5,18 @@ html, body{
 }
 
 .Login-main{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*align-items: center;*/
+    /*justify-content: center;*/
     /* Gray/Gray-0 */
 }
 
-.horizontal-align{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
+/*.horizontal-align{*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    justify-content: center;*/
+/*}*/
 
 .vertical-align{
     display: flex;
@@ -40,7 +40,7 @@ html, body{
     color: #ADB5BD;
 }
 
-.bold-text{
+.bold-text-login{
     font-family: 'DM Sans', sans-serif;
     font-style: normal;
     font-weight: 700;
@@ -48,11 +48,11 @@ html, body{
     line-height: 130%;
     /* or 31px */
     letter-spacing: -1px;
-
+    /**/
     /* Gray/Gray-9 */
     color: #212529;
     order: 0;
-    align-self: stretch;
+    /*align-self: stretch;*/
 }
 
 .body-text{

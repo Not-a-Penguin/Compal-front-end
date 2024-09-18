@@ -15,13 +15,13 @@ export default function DivergenceTable(props) {
                 {props.divergencias.map((divergencia, key) => (
                     <tr key={key}>
                         <td className={'history-modal-table-td'}>
-                            {divergencia.divergencia}
+                            {divergencia["nomenclatura"]}
                         </td>
                         <td className={'history-modal-table-td'}>
-                            {divergencia.valor_esperado}
+                            {divergencia['valorEsperado']}
                         </td>
                         <td className={'history-modal-table-td'}>
-                            {divergencia.valor_CTE}
+                            {divergencia['valorDivergente']}
                         </td>
                     </tr>
                 ))}
