@@ -22,49 +22,9 @@ const style = {
 
 
 export default function HistoryModalInvalid(props){
-    //TODO: fazer get pelo id para recuperar as notas associadas ao CTE
-
-    // console.log("Inside invalid")
 
     const [dadosNotaInvalido, setDadosNotaInvalido] = useState([]);
     const [divergencias, setDivergencias] = useState([])
-
-    const nota_falsa2 = [
-        [{
-            "id": 1,
-            "N_cte": "54681",
-            "N_pedido": "MAS2400484",
-            "cliente": "SYNCREON SOLUCOES LOGISTICAS LTDA",
-            "valor_frete_pedido": "559.615,14 R$",
-            "valor_total_pedido": "34.615,14 R$",
-            "notas_fiscais": [
-                {
-                    "n_nota": 761,
-                    "items": [
-                        {
-                            "quantidade": 21,
-                            "part_number": "72A15L31415",
-                            "descricao": "PLACA MAE IDH50 PN 5710J",
-                            "valor_unitario": "1.648,34 R$",
-                            "valor_total": "34.615,14 R$"
-                        }
-                    ]
-                },
-                {
-                    "n_nota": 7444,
-                    "items": [
-                        {
-                            "quantidade": 21,
-                            "part_number": "72A15L31415",
-                            "descricao": "PLACA MAE IDH50 PN 5710J",
-                            "valor_unitario": "1.648,34 R$",
-                            "valor_total": "34.615,14 R$"
-                        }
-                    ]
-                },
-            ]
-        }],
-    ]
 
     useEffect(() => {
 
