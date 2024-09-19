@@ -102,11 +102,11 @@ export default function HistoryModalInvalid(props){
                         <div className={'modal-valid-body'}>
                             <div className={'modal-valid-body-aligner1'}>
                                 <HistoryModalInput title={"Número do CTE"} value={dadosNotaInvalido.N_cte}/>
-                                <HistoryModalInput title={"Valor do frete"} value={dadosNotaInvalido.valor_frete_pedido}/>
+                                <HistoryModalInput title={"Valor do frete"} value={"R$" + dadosNotaInvalido.valor_frete_pedido}/>
                             </div>
                             <div className={'modal-valid-body-aligner1'}>
                                 <HistoryModalInput title={"Número do pedido"} value={dadosNotaInvalido.N_pedido}/>
-                                <HistoryModalInput title={"Valor total do pedido"} value={dadosNotaInvalido.valor_total_pedido}/>
+                                <HistoryModalInput title={"Valor total do pedido"} value={"R$" + dadosNotaInvalido.valor_total_pedido}/>
                             </div>
                             <div className={'modal-valid-body-aligner1'}>
                                 <HistoryModalInput title={"Cliente"} value={dadosNotaInvalido.cliente}/>
