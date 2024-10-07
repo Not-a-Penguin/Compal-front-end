@@ -33,7 +33,6 @@ export default function HistoryModalValid(props){
             setDadosNota(response.data[0])
             // console.log(response)
         });
-
     },[props.id]);
 
     if(dadosNota){

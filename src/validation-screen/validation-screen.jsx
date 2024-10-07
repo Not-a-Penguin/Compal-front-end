@@ -1,5 +1,5 @@
 import './validation-screen-style.css'
-import CteValidationForm from "../components/validation-components/validation-form/cte-validation-form.jsx";
+import ValidationForm from "../components/validation-components/validation-form/cte-validation-form.jsx";
 import ValidationDropdown from "../components/validation-components/validation-form/validation-dropdown.jsx";
 import ValidationButton from "../components/validation-components/validation-button.jsx";
 import {useEffect, useState} from "react";
@@ -8,13 +8,13 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 import axios from 'axios';
-axios.defaults.baseURL = 'http://192.168.195.197:3333';
+axios.defaults.baseURL = 'http://192.168.195.40:3333';
 axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
 export default function ValidationScreen() {
 
     // const transportadoras = ['Supersonic Logística e transportes LTDA', 'Brinks', 'EALE', 'IBL'];
-    const tipoTransporte = ['Aéreo', 'Rodoviário', 'Multimodal'];
+    const tipoTransporte = ['Aéreo', "Rodoviário", 'Multimodal'];
     const operacao = ['D+1', 'D+2', 'D+3', 'D+4', 'D+5', 'D+6'];
     // const tipoSeguro = ['NA', "DDR - Compal", "DDR - Transportadora"];
 
@@ -180,12 +180,12 @@ export default function ValidationScreen() {
             }}>
                 <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around'}}>
                     <div className={'validation-main-card-column'}>
-                        <CteValidationForm title={"Número do pedido"} placeholder={"Informação auto-preenchida"} disabled={true} id={"N_pedido"} value={numeroPedido}/>
+                        <ValidationForm title={"Número do pedido"} placeholder={"Informação auto-preenchida"} disabled={true} id={"N_pedido"} value={numeroPedido}/>
                         <ValidationDropdown title={"Transportadora"} dropdownData={transportadoras} id={"transportadora"}/>
                     </div>
 
                     <div className={'validation-main-card-column'}>
-                        <CteValidationForm title={"CTE"} placeholder={"Selecione um arquivo"} disabled={false} inputType={"file"} id={"CTE"}/>
+                        <ValidationForm title={"CTE"} placeholder={"Selecione um arquivo"} disabled={false} inputType={"file"} id={"CTE"}/>
                         <ValidationDropdown title={"Tipo de Transporte"} dropdownData={tipoTransporte} id={"tipo_transportadora"}/>
                     </div>
                     <div className={'validation-main-card-column'}>
@@ -196,7 +196,7 @@ export default function ValidationScreen() {
                     <ValidationDropdown title={"Aeroporto de destino"} dropdownData={aeroportos} id={"aeroporto_destino"}/>
             </div>
 
-            <ValidationButton buttonCallback={buttonCallback}/>
+            <ValidationButton buttonCallback={buttonCallback} title={'Validar'}/>
 
             <div className={'validation-autofilled-div'}>
                 <div className={'form-title-text'}>
@@ -208,9 +208,9 @@ export default function ValidationScreen() {
                         flexDirection: "row",
                         justifyContent: "space-between",
                     }}>
-                        <CteValidationForm title={"Nota Fiscal"} placeholder={"-"} disabled={true} id={'nota_fiscal'} value={notaFiscal}/>
-                        <CteValidationForm title={"Peso bruto"} placeholder={"-"} disabled={true} value={pesoBruto}/>
-                        <CteValidationForm title={"Peso cubado"} placeholder={"-"} disabled={true} value={pesoCubado}/>
+                        <ValidationForm title={"Nota Fiscal"} placeholder={"-"} disabled={true} id={'nota_fiscal'} value={notaFiscal}/>
+                        <ValidationForm title={"Peso bruto"} placeholder={"-"} disabled={true} value={pesoBruto}/>
+                        <ValidationForm title={"Peso cubado"} placeholder={"-"} disabled={true} value={pesoCubado}/>
                     </div>
 
                     <div style={{
@@ -223,16 +223,16 @@ export default function ValidationScreen() {
                             display: 'flex',
                             flexDirection: 'column',
                         }}>
-                            <CteValidationForm title={"Endereço de remetente"} placeholder={'-'} disabled={true} id={'endereco_remetente'} value={enderecoRemetente}/>
-                            <CteValidationForm title={"Complemento"} placeholder={"-"} disabled={true} id={'complemento_remetente'} value={remetenteComplemento}/>
-                            <CteValidationForm title={"Bairro"} placeholder={"-"} disabled={true} id={'bairro_remetente'} value={remetenteBairro}/>
-                            <CteValidationForm title={"CEP"} placeholder={"-"} disabled={true} id={'cep_remetente'} value={remetenteCep}/>
+                            <ValidationForm title={"Endereço de remetente"} placeholder={'-'} disabled={true} id={'endereco_remetente'} value={enderecoRemetente}/>
+                            <ValidationForm title={"Complemento"} placeholder={"-"} disabled={true} id={'complemento_remetente'} value={remetenteComplemento}/>
+                            <ValidationForm title={"Bairro"} placeholder={"-"} disabled={true} id={'bairro_remetente'} value={remetenteBairro}/>
+                            <ValidationForm title={"CEP"} placeholder={"-"} disabled={true} id={'cep_remetente'} value={remetenteCep}/>
                         </div>
                         <div>
-                            <CteValidationForm title={"Endereço de destinatário"} placeholder={'-'} disabled={true} id={'endereco_destinatario'} value={destinatarioEndereco}/>
-                            <CteValidationForm title={"Complemento"} placeholder={"-"} disabled={true} id={'complemento_remetente'} value={destinatarioComplemento}/>
-                            <CteValidationForm title={"Bairro"} placeholder={"-"} disabled={true} id={'bairro_remetente'} value={destinatarioBairro}/>
-                            <CteValidationForm title={"CEP"} placeholder={"-"} disabled={true} id={'cep_remetente'} value={destinatarioCep}/>
+                            <ValidationForm title={"Endereço de destinatário"} placeholder={'-'} disabled={true} id={'endereco_destinatario'} value={destinatarioEndereco}/>
+                            <ValidationForm title={"Complemento"} placeholder={"-"} disabled={true} id={'complemento_remetente'} value={destinatarioComplemento}/>
+                            <ValidationForm title={"Bairro"} placeholder={"-"} disabled={true} id={'bairro_remetente'} value={destinatarioBairro}/>
+                            <ValidationForm title={"CEP"} placeholder={"-"} disabled={true} id={'cep_remetente'} value={destinatarioCep}/>
                         </div>
                     </div>
                 </div>

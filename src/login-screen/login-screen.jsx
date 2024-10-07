@@ -10,7 +10,6 @@ import { useNavigate } from "react-router-dom";
 export default function LoginScreen() {
 
     const navigate = useNavigate();
-    // TODO: implement logic
     function signUp(){
         console.log("Sign Up");
         return navigate("/register");

@@ -1,0 +1,78 @@
+.product-screen-button-selector {
+    /* Rectangle 34624314 */
+
+    box-sizing: border-box;
+
+    /*position: absolute;*/
+    width: 221px;
+    height: 38px;
+
+    background: #FFFFFF;
+    /*border-right: 1px solid #000000;*/
+    border-style: solid;
+
+    /*width: 53px;*/
+    /*height: 20px;*/
+
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 20px;
+    /* identical to box height, or 143% */
+    color: #000000;
+}
+
+.product-screen-button-selector-active{
+    /* Rectangle 34624314 */
+
+    box-sizing: border-box;
+
+    /*position: absolute;*/
+    width: 221px;
+    height: 38px;
+
+    background: #E3F7CB;
+    /*border-right: 1px solid #000000;*/
+    border-style: solid;
+
+    /*width: 53px;*/
+    /*height: 20px;*/
+
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 20px;
+    /* identical to box height, or 143% */
+
+    color: #000000;
+}
+
+.product-screen-button-selector:hover{
+    cursor: pointer;
+}
+
+.menu-selector-subtitle{
+    /* logo */
+
+    /*width: 221px;*/
+    height: 18px;
+    left: 313px;
+    top: 199px;
+
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 100%;
+    leading-trim: both;
+    text-edge: cap;
+
+    color: #000000;
+    margin-bottom: 5px;
+}
+
+.product-screen-selector{
+    margin-bottom: 20px;
+}

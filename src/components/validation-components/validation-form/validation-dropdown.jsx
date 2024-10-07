@@ -2,7 +2,7 @@ import FormTitleText from "./form-title-text.jsx";
 
 export default function ValidationDropdown(props){
 
-    const selections= props.dropdownData;
+    const selections = props.dropdownData;
     // console.log(selections);
 
     return(

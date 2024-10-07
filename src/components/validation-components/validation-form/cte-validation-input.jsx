@@ -8,7 +8,7 @@ export default function CteValidationInput(props) {
     return(
         <div>
             {disabled ? <input className={'cte-validation-input'} placeholder={props.placeholder} disabled id={props.id} value={props.value}/> :
-                <input type={props.inputType} className={'cte-validation-input'} placeholder={props.placeholder} id={props.id} value={props.value}></input>}
+                <input type={props.inputType} className={'cte-validation-input'} placeholder={props.placeholder} id={props.id}></input>}
         </div>
     )
 }

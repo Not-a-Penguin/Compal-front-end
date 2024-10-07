@@ -4,7 +4,7 @@ export default function ValidationButton(props) {
     return(
         <button className={'validation-button'} onClick={props.buttonCallback}>
             <div className={'validation-button-text'}>
-                Validar
+                {props.title}
             </div>
         </button>
     )

@@ -2,14 +2,14 @@ import '../history-components/table-row-style.css'
 
 export default function BidTableRow(props){
 
-    const transportadora = props.data.transportadora;
-    const origem = props.data.origem;
-    const destino = props.data.destino;
+    const transportadora = props.data.transportadora.descricao;
+    const origem = props.data.origem.descricao;
+    const destino = props.data.destino.descricao;
     const id = props.data.id;
 
-    function renderButton(id){
+    function renderFillBid(id){
         return(
-            <button className={'button-table-row-valid'} style={{width: '130px'}} onClick={function (){props.buttonStatus(id)}}>
+            <button className={'button-table-row-valid'} style={{width: '130px'}} onClick={function (){props.fillBidButton(id)}}>
                 <div style={{
                     display: 'flex',
                     flexDirection: 'row',
@@ -17,7 +17,23 @@ export default function BidTableRow(props){
                     gap: '5px',
                 }}>
                     <img src={'src/assets/arrow-square.svg'}/>
-                    Preencher BID
+                    Editar BID
+                </div>
+            </button>
+        )
+    }
+
+    function renderDetailsBid(id){
+        return(
+            <button className={'button-table-row-valid'} style={{width: '130px'}} onClick={function (){props.detailBidButton(id)}}>
+                <div style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    gap: '5px',
+                }}>
+                    <img src={'src/assets/arrow-square.svg'}/>
+                    Detalhes
                 </div>
             </button>
         )
@@ -35,7 +51,8 @@ export default function BidTableRow(props){
                 {destino}
             </td>
             <td>
-                {renderButton(id)}
+                {renderFillBid(id)}
+                {renderDetailsBid(id)}
             </td>
         </tr>
     )

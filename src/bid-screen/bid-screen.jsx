@@ -6,63 +6,55 @@ import HistoryScreenButton from "../components/history-components/history-screen
 
 import { useState, useEffect } from "react";
 import ReactPaginate from 'react-paginate';
-import axios from "axios";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos.js";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos.js";
 import BidTableRow from "../components/bid-components/bid-table-row.jsx";
 import BidModalFill from "../components/bid-components/bid-modal-fill.jsx";
+import BidDetailModal from "../components/bid-components/bid-detail-modal.jsx";
+import AddBidModal from "../components/bid-components/add-bid-modal.jsx";
+
+import axios from 'axios';
+axios.defaults.baseURL = 'http://192.168.195.40:3333';
+axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
 export default function BidScreen(props) {
-
-    const items = [
-        {
-            "currentPage": 23,
-            "Total Pages": 6
-        },
-        {   "id": 1,
-            "transportadora": 'Sedex',
-            "origem": "Manaus amazonas",
-            "destino": "Belém Pará"
-        },
-        {   "id": 2,
-            "transportadora": 'Águias',
-            "origem": "Gondor",
-            "destino": "Mordor"
-        },
-    ];
 
     const [data, setData] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
     const [currentId, setCurrentId] = useState(0);
 
     const [open, setOpen] = useState(false);
+    const [openDetail, setOpenDetail] = useState(false);
+    const [openAddBid, setOpenAddBid] = useState(false)
+
     const handleOpen = () => setOpen(true);
+    const handleOpenDetail = () => setOpenDetail(true);
+    const handleOpenAddBid = () => setOpenAddBid(true);
+
     const handleClose = () => setOpen(false);
+    const handleCloseDetail = () => setOpenDetail(false)
+    const handleCloseAddBid = ()=> setOpenAddBid(false)
 
     function buttonStatus(id){
-        // console.log("Id current = ", id);
+        console.log("Id current = ", id);
         setCurrentId(id);
     }
 
     const handlePageChange = (selectedPage) => {
-        // console.log("Page selected: ", selectedPage.selected);
+        console.log("Page selected: ", selectedPage.selected);
         setCurrentPage(selectedPage.selected);
     };
 
     useEffect(() => {
-        axios.get('https://jsonplaceholder.typicode.com/posts').then((response) => {
-            // setData(response.data);
-            // console.log(response.data)
-            console.log("updating data")
-            setData(items);
-            // console.log("Items: ")
-            // console.log(items);
-            // setTotalPages(Math.ceil(items.data.length / itemsPerPage));
+        axios.get(`/bid?page=${currentPage}`).then((response) => {
+            console.log(response.data);
+            setData(response.data[0]);
         });
     }, [currentPage]);
 
     function Items({ currentItems }) {
-        currentItems = currentItems.slice(1, currentItems.length);
+        // console.log(currentItems)
+
         return(
             <div style={{
                 display: 'flex',
@@ -92,10 +84,14 @@ export default function BidScreen(props) {
                     </thead>
                     <tbody>
                     {currentItems.map((item, key) => (
-                        <BidTableRow key={key} data={item} buttonStatus={function(){
-                            console.log("Button pressed")
+                        <BidTableRow key={key} data={item} fillBidButton={function(){
+                            console.log("Fill Button pressed")
                             buttonStatus(item.id);
                             handleOpen();
+                        }} detailBidButton={function(){
+                            console.log("Detail Bid pressed");
+                            buttonStatus(item.id);
+                            handleOpenDetail();
                         }}/>
                         // <div key={item.id}>{item.N_cte}</div>
                     ))}
@@ -106,12 +102,15 @@ export default function BidScreen(props) {
     }
 
     function addBidCallback(){
-        return 0
+        handleOpenAddBid();
     }
 
     return(
         <>
+            <AddBidModal handleClose={handleCloseAddBid} handleOpen={openAddBid}/>
             <BidModalFill handleClose={handleClose} handleOpen={open} id={currentId}/>
+            <BidDetailModal handleClose={handleCloseDetail} handleOpen={openDetail} id={currentId}/>
+
             <div className={'history-screen-header'}>
                 <div className={'history-header-text'}>
                     Consultar BIDs cadastrados
@@ -126,15 +125,16 @@ export default function BidScreen(props) {
                     <HistoryScreenButton text={"Adicionar"} icon={'src/assets/sidebar-icons/plus-symbol-green.svg'} onClick={addBidCallback}/>
                 </div>
 
-                <Items currentItems={data} />
+                {data['bids'] ? <Items currentItems={data['bids']} /> : <div/>}
+
                 <div style={{
                     display: 'flex',
                     justifyContent: 'end',
                     marginRight: '20px',
                 }}>
                     <ReactPaginate
-                        activeClassName={'item active '}
-                        breakClassName={'item break-me '}
+                        activeClassName={'item active'}
+                        breakClassName={'item break-me'}
                         breakLabel={'...'}
                         containerClassName={'pagination'}
                         disabledClassName={'disabled-page'}
@@ -146,7 +146,7 @@ export default function BidScreen(props) {
                         onPageChange={handlePageChange}
                         forcePage={currentPage}
                         // pageCount={pageCount}
-                        pageCount={items[0]['Total Pages']}
+                        pageCount={data['totalPages']}
                         pageClassName={'item pagination-page '}
                         previousClassName={"item previous"}
                         previousLabel={<ArrowBackIosIcon style={{ fontSize: 10, width: 15 }} />}

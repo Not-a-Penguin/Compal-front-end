@@ -15,7 +15,7 @@ import TableRow from "../components/history-components/table-row.jsx"
 import HistoryModal from "../components/history-components/history-modal/history-modal.jsx";
 
 import axios from 'axios';
-axios.defaults.baseURL = 'http://192.168.195.197:3333';
+axios.defaults.baseURL = 'http://192.168.195.40:3333';
 axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
 registerLocale('pt-br', ptBR)
@@ -51,22 +51,14 @@ export default function HistoryScreen(){
     }
 
     useEffect(() => {
-        console.log("Page changed to", currentPage);
-        // console.log("Hi there")
         axios.get(`/validacao?page=${currentPage}`).then((response) => {
             setData(response.data);
-            // setTotalPages(data.totalPages);
-            // console.log(response)
         });
     }, [currentPage]);
 
     function Items({ currentItems }) {
-        // currentItems = currentItems.slice(1, currentItems.length);
 
         currentItems = data['validacoes'];
-        currentItems = data['validacoes'];
-        // console.log("Inside Items")
-        // console.log(currentItems);
 
         if(currentItems){
             return(

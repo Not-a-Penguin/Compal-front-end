@@ -24,13 +24,14 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: left;
+    align-items: center;
     gap: 20px;
     padding-bottom: 20px;
 }
 
 .bid-modal-input-title{
-    width: 100px;
-    height: 11px;
+    /*width: 100px;*/
+    height: 10px;
 
     font-family: 'Poppins', sans-serif;
     font-style: normal;
@@ -50,7 +51,7 @@
 .bid-modal-input{
 
     box-sizing: border-box;
-    width: 100%;
+    width: 200px;
     height: 34px;
     border: 1px solid #D0D0D0;
     border-radius: 5px;

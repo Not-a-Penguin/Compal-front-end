@@ -6,6 +6,7 @@ import ValidationScreen from "../validation-screen/validation-screen.jsx";
 import {useState} from "react";
 import HistoryScreen from "../history-screen/history-screen.jsx";
 import BidScreen from "../bid-screen/bid-screen.jsx";
+import ProductMain from "../product-screen/product-main/product-main.jsx";
 
 export default function ApplicationMain(){
 
@@ -22,6 +23,9 @@ export default function ApplicationMain(){
         }
         else if(menu === 'sidebar-2'){
             return <HistoryScreen/>
+        }
+        else if(menu === 'sidebar-3'){
+            return <ProductMain/>
         }
         else if(menu === 'sidebar-4'){
             return <BidScreen/>
