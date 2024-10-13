@@ -7,6 +7,7 @@ import ProductRegisterTableRow from "../../components/product-components/product
 import axios from "axios";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import {Bounce, toast, ToastContainer} from "react-toastify";
 axios.defaults.baseURL = 'http://192.168.195.40:3333';
 axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
@@ -14,6 +15,7 @@ export default function DestinyRegister(props) {
 
     const [cidade, setCidade] = useState("");
     const [centroDistribuicao, setCcentroDistribuicao] = useState("");
+    const [updateTable, setUpdateTable] = useState(false)
 
     function addDestinyCallback(){
         const config = {
@@ -25,7 +27,50 @@ export default function DestinyRegister(props) {
                 "descricao": document.getElementById("destiny_register_cidade").value,
                 // "aereporto": document.getElementById("origin_register_centro_dist").value,
             }, config).then(function (response) {
-            console.log(response);
+            if(response.status === 201){
+                setUpdateTable(!updateTable)
+                toast.success(
+                    <div style={{textAlign: 'left'}}>
+                        <div>
+                            <div> </div>
+                            Salvo com sucesso. <br /><br />
+                        </div>
+                        <div>
+                            {response.data.message}
+                        </div>
+                    </div>, {
+                        position: "bottom-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: false,
+                        progress: undefined,
+                        theme: "colored",
+                        transition: Bounce
+                    })
+            }
+        }).catch(function(err){
+            toast.error(
+                <div style={{textAlign: 'left'}}>
+                    <div>
+                        <div> </div>
+                        Operação falhou.. <br /><br />
+                    </div>
+                    <div>
+                        Erro de comunicação com o servidor.
+                    </div>
+                </div>, {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: false,
+                    progress: undefined,
+                    theme: "colored",
+                    transition: Bounce
+                })
         })
     }
 
@@ -50,7 +95,7 @@ export default function DestinyRegister(props) {
             console.log(response.data[0]);
             setData(response.data[0])
         });
-    }, [currentPage]);
+    }, [currentPage, updateTable]);
 
     function Items({ currentItems }) {
         // currentItems = currentItems.slice(1, currentItems.length);
@@ -63,7 +108,8 @@ export default function DestinyRegister(props) {
                     <table className={'history-table'}>
                         <thead>
                         <tr className={'table-row-header'}>
-                            <th>Cidade</th> <th>Ações</th>
+                            <th>Cidade</th>
+                            {/*<th>Ações</th>*/}
                         </tr>
                         </thead>
                         <tbody>
@@ -145,6 +191,19 @@ export default function DestinyRegister(props) {
                     />
                 </div>
             </div>
+            <ToastContainer
+                position="bottom-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss={false}
+                draggable={false}
+                pauseOnHover
+                theme="colored"
+                transition: Bounce
+            />
         </div>
     )
 }

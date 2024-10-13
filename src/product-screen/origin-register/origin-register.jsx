@@ -9,6 +9,7 @@ import TableRow from "../../components/history-components/table-row.jsx";
 import ProductRegisterTableRow from "../../components/product-components/product-register-table-row.jsx";
 
 import axios from 'axios';
+import {Bounce, toast, ToastContainer} from "react-toastify";
 axios.defaults.baseURL = 'http://192.168.195.40:3333';
 axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
@@ -27,7 +28,50 @@ export default function OriginRegister(props) {
                 "descricao": document.getElementById("origin_register_cidade").value,
                 // "aereporto": document.getElementById("origin_register_centro_dist").value,
             }, config).then(function (response) {
-            console.log(response);
+            if(response.status === 201){
+                setUpdateTable(!updateTable)
+                toast.success(
+                    <div style={{textAlign: 'left'}}>
+                        <div>
+                            <div> </div>
+                            Salvo com sucesso. <br /><br />
+                        </div>
+                        <div>
+                            {response.data.message}
+                        </div>
+                    </div>, {
+                        position: "bottom-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: false,
+                        progress: undefined,
+                        theme: "colored",
+                        transition: Bounce
+                    })
+            }
+        }).catch(function(err){
+            toast.error(
+                <div style={{textAlign: 'left'}}>
+                    <div>
+                        <div> </div>
+                        Operação falhou.. <br /><br />
+                    </div>
+                    <div>
+                        Erro de comunicação com o servidor.
+                    </div>
+                </div>, {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: false,
+                    progress: undefined,
+                    theme: "colored",
+                    transition: Bounce
+                })
         })
     }
 
@@ -37,11 +81,34 @@ export default function OriginRegister(props) {
     const [currentId, setCurrentId] = useState(0);
     const [currentStatus, setCurrentStatus] = useState("Inválido")
     const [data, setData] = useState([])
+    const [updateTable, setUpdateTable] = useState(false)
 
     function deleteButtonCallback(id){
-        alert(`Deleting data row of id = ${id}`)
+
         axios.delete(`/origem/${id}`).then(function (response) {
-            console.log(response);
+            if(response.status === 201){
+                toast.success(
+                    <div style={{textAlign: 'left'}}>
+                        <div>
+                            <div> </div>
+                            Salvo com sucesso. <br /><br />
+                        </div>
+                        <div>
+                            {response.data.message}
+                        </div>
+                    </div>, {
+                        position: "bottom-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: false,
+                        progress: undefined,
+                        theme: "colored",
+                        transition: Bounce
+                    })
+                setUpdateTable(!updateTable)
+            }
         })
     }
 
@@ -52,7 +119,7 @@ export default function OriginRegister(props) {
             // console.log(response.data[0]);
             setData(response.data[0])
         });
-    }, [currentPage]);
+    }, [currentPage, updateTable]);
 
     function Items({ currentItems }) {
         // currentItems = currentItems.slice(1, currentItems.length);
@@ -65,7 +132,8 @@ export default function OriginRegister(props) {
                     <table className={'history-table'}>
                         <thead>
                         <tr className={'table-row-header'}>
-                            <th>Cidade</th> <th>Ações</th>
+                            <th>Cidade</th>
+                            {/*<th>Ações</th>*/}
                         </tr>
                         </thead>
                         <tbody>
@@ -147,6 +215,19 @@ export default function OriginRegister(props) {
                     />
                 </div>
             </div>
+            <ToastContainer
+                position="bottom-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss={false}
+                draggable={false}
+                pauseOnHover
+                theme="colored"
+                transition: Bounce
+            />
         </div>
     )
 }

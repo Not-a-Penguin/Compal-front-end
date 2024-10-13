@@ -28,9 +28,10 @@ export default function ProductRegisterTableRow(props) {
                     <td key={i}>{column}</td>
                 )
             })}
-            <td>
-                {renderButton(props.columns.id)}
-            </td>
+            {/*{props.noDelete ? <div></div> : <td>*/}
+            {/*    {renderButton(props.columns.id)}*/}
+            {/*</td>}*/}
+
         </tr>
     )
 }

@@ -9,6 +9,7 @@ import ValidationDropdown from "../validation-components/validation-form/validat
 import {useEffect, useState} from "react";
 
 import axios from 'axios';
+import {Bounce, toast, ToastContainer} from "react-toastify";
 axios.defaults.baseURL = 'http://192.168.195.40:3333';
 axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
@@ -57,6 +58,27 @@ export default function AddBidModal(props){
                 "modal": document.getElementById("add-bid-modal").value,
             }, config).then(function (response){
             console.log(response);
+        }).catch(function(err){
+            toast.error(
+                <div style={{textAlign: 'left'}}>
+                    <div>
+                        <div> </div>
+                        Operação falhou.. <br /><br />
+                    </div>
+                    <div>
+                        Erro de comunicação com o servidor.
+                    </div>
+                </div>, {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: false,
+                    progress: undefined,
+                    theme: "colored",
+                    transition: Bounce
+                })
         })
     }
 
@@ -84,6 +106,19 @@ export default function AddBidModal(props){
                     </div>
                 </Box>
             </Modal>
+            <ToastContainer
+                position="bottom-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss={false}
+                draggable={false}
+                pauseOnHover
+                theme="colored"
+                transition: Bounce
+            />
         </div>
     )
 }

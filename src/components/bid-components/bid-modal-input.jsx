@@ -7,10 +7,9 @@ export default function BidModalInput(props) {
             flexDirection: 'column',
             justifyContent: 'space-between',
             gap: '10px',
-            // width: '100%'
         }}>
             <div className={'bid-modal-input-title'}>{props.title}</div>
-            <input onChange={props.onChange} value={props.value} className={'bid-modal-input'}/>
+            <input id={props.id} onChange={props.onChange} value={props.value} className={'bid-modal-input'}/>
         </div>
     )
 }

@@ -7,6 +7,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos.js";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos.js";
 import axios from "axios";
 import ProductRegisterTableRow from "../../components/product-components/product-register-table-row.jsx";
+import {Bounce, toast, ToastContainer} from "react-toastify";
 
 export default function ProductRegister(props) {
 
@@ -32,7 +33,50 @@ export default function ProductRegister(props) {
                 "lower": document.getElementById("lower").value,
                 "quantidadeMax": document.getElementById("quantidadeMax").value,
             }, config).then(function (response) {
-            console.log(response);
+                console.log(response);
+                if(response.status === 201){
+                    toast.success(
+                        <div style={{textAlign: 'left'}}>
+                            <div>
+                                <div> </div>
+                                Salvo com sucesso. <br /><br />
+                            </div>
+                            <div>
+                                {response.data.message}
+                            </div>
+                        </div>, {
+                            position: "bottom-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: false,
+                            progress: undefined,
+                            theme: "colored",
+                            transition: Bounce
+                    })
+                }
+            }).catch(function(err){
+            toast.error(
+                <div style={{textAlign: 'left'}}>
+                    <div>
+                        <div> </div>
+                        Operação falhou.. <br /><br />
+                    </div>
+                    <div>
+                        Erro de comunicação com o servidor.
+                    </div>
+                </div>, {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: false,
+                    progress: undefined,
+                    theme: "colored",
+                    transition: Bounce
+                })
         })
     }
 
@@ -43,9 +87,9 @@ export default function ProductRegister(props) {
     const [currentStatus, setCurrentStatus] = useState("Inválido")
     const [data, setData] = useState([{'totalPages': 0}])
 
-    function deleteButtonCallback(id){
-        alert(`Deleting data row of id = ${id}`)
-    }
+    // function deleteButtonCallback(id){
+    //     alert(`Deleting data row of id = ${id}`)
+    // }
 
     useEffect(() => {
         // console.log("Inside use effect add product")
@@ -70,14 +114,15 @@ export default function ProductRegister(props) {
                     <table className={'history-table'}>
                         <thead>
                         <tr className={'table-row-header'}>
-                            <th>Partnumber</th> <th>Dimensão da caixa</th> <th>Standard</th> <th>Upper</th> <th>Lower</th>
-                            <th>Qtd. máxima de caixas</th> <th>Ações</th>
+                            <th>Partnumber</th> <th>Dimensão da caixa</th> <th> Peso Standard</th> <th>Peso Upper</th> <th>Peso Lower</th>
+                            <th>Qtd. máxima de caixas</th>
+                            {/*<th>Ações</th>*/}
                         </tr>
                         </thead>
                         <tbody>
                         {currentItems.map((item, key) => {
                             const columns = [item['partNumber'], item['dimensaoCaixa'], item['standard'], item['upper'], item['lower'], item['quantidadeMax']];
-                            return(<ProductRegisterTableRow key={key} data={item} columns={columns}
+                            return(<ProductRegisterTableRow key={key} data={item} columns={columns} noDelete={1}
                                  buttonStatus={function () {
                                      deleteButtonCallback(item.id);
                                      //     handleOpen();
@@ -114,15 +159,15 @@ export default function ProductRegister(props) {
                 }}>
                     <div className={'validation-main-card-column'}>
                         <ValidationForm title={"Partnumber"} placeholder={"Digite o partnumber"} disabled={false} id={"partNumber"} value={partNumberCompal}/>
-                        <ValidationForm title={"Upper"} placeholder={"Digite a dimensão da caixa"} disabled={false} id={"upper"} value={dimensaoCaixa}/>
+                        <ValidationForm title={"Peso Upper"} placeholder={"Digite a dimensão da caixa"} disabled={false} id={"upper"} value={dimensaoCaixa}/>
                     </div>
                     <div className={'validation-main-card-column'}>
                         <ValidationForm title={"Dimensão da caixa"} placeholder={"Digite o partnumber"}
                                         disabled={false} id={"dimensaoCaixa"} value={partNumberCliente}/>
-                        <ValidationForm disabled={false} placeholder={"Digite o lower"} title={"Lower"} dropdownData={embalagemData} id={"lower"}/>
+                        <ValidationForm disabled={false} placeholder={"Digite o lower"} title={"Peso Lower"} dropdownData={embalagemData} id={"lower"}/>
                     </div>
                     <div className={'validation-main-card-column'}>
-                        <ValidationForm title={"Standard"} placeholder={"Digite o peso unitário"}
+                        <ValidationForm title={"Peso Standard"} placeholder={"Digite o peso unitário"}
                                         disabled={false} id={"standard"} value={pesoUnitario}/>
                         <ValidationForm title={"Qtd. máxima por caixa"} placeholder={"Digite a quantidade."}
                                         disabled={false} id={"quantidadeMax"} value={quantidadeCaixas}/>
@@ -160,6 +205,19 @@ export default function ProductRegister(props) {
                     />
                 </div>
             </div>
+            <ToastContainer
+                position="bottom-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss={false}
+                draggable={false}
+                pauseOnHover
+                theme="colored"
+                transition: Bounce
+            />
         </div>
     )
 }

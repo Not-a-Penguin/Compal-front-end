@@ -157,10 +157,28 @@ export default function ValidationScreen() {
                             transition: Bounce
                         })
                 }
-             })
-            .catch(function (error) {
-                console.log(error);
-            });
+             }).catch(function(err){
+                toast.error(
+                    <div style={{textAlign: 'left'}}>
+                        <div>
+                            <div> </div>
+                            Operação falhou.. <br /><br />
+                        </div>
+                        <div>
+                            Erro de comunicação com o servidor.
+                        </div>
+                    </div>, {
+                        position: "bottom-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: false,
+                        progress: undefined,
+                        theme: "colored",
+                        transition: Bounce
+                    })
+        })
     }
 
     return(

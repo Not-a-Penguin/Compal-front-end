@@ -18,7 +18,7 @@ export default function BidOutrosDropdown(props) {
             <div className={'bid-outros-dropdown-title'}>
                 {props.title}
             </div>
-            <select className={'bid-outros-dropdown'} id={props.id}>
+            <select className={'bid-outros-dropdown'} id={props.id} onChange={props.onChangeCallback}>
                 <option value="" disabled selected hidden>
                     Escolha uma opção
                 </option>

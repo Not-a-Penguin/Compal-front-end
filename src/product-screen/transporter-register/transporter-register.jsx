@@ -7,6 +7,7 @@ import ProductRegisterTableRow from "../../components/product-components/product
 import ReactPaginate from "react-paginate";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos.js";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos.js";
+import {Bounce, toast, ToastContainer} from "react-toastify";
 
 export default function TransporterRegister(props) {
 
@@ -21,7 +22,50 @@ export default function TransporterRegister(props) {
             {
                 "descricao": document.getElementById("register_transportadora").value,
             }, config).then(function (response) {
-            console.log(response);
+            if(response.status === 201){
+                toast.success(
+                    <div style={{textAlign: 'left'}}>
+                        <div>
+                            <div> </div>
+                            Salvo com sucesso. <br /><br />
+                        </div>
+                        <div>
+                            {response.data.message}
+                        </div>
+                    </div>, {
+                        position: "bottom-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: false,
+                        progress: undefined,
+                        theme: "colored",
+                        transition: Bounce
+                    })
+                setUpdateTable(!updateTable)
+            }
+        }).catch(function(err){
+            toast.error(
+                <div style={{textAlign: 'left'}}>
+                    <div>
+                        <div> </div>
+                        Operação falhou.. <br /><br />
+                    </div>
+                    <div>
+                        Erro de comunicação com o servidor.
+                    </div>
+                </div>, {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: false,
+                    progress: undefined,
+                    theme: "colored",
+                    transition: Bounce
+                })
         })
     }
 
@@ -33,43 +77,44 @@ export default function TransporterRegister(props) {
     const [currentStatus, setCurrentStatus] = useState("Inválido")
     const [data, setData] = useState([])
 
+    const [updateTable, setUpdateTable] = useState(false)
+
     function deleteButtonCallback(id){
-        alert(`Deleting data row of id = ${id}`)
+        // alert(`Deleting data row of id = ${id}`)
         axios.delete(`/transportadora/${id}`).then(function (response) {
-            console.log(response);
+            // console.log(response);
+            if(response.status === 201){
+                toast.success(
+                    <div style={{textAlign: 'left'}}>
+                        <div>
+                            <div> </div>
+                            Salvo com sucesso. <br /><br />
+                        </div>
+                        <div>
+                            {response.data.message}
+                        </div>
+                    </div>, {
+                        position: "bottom-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: false,
+                        progress: undefined,
+                        theme: "colored",
+                        transition: Bounce
+                    })
+            }
         })
     }
 
-    const fakeData = [
-        {
-            "currentPage": 1,
-            "totalPages": 2
-        },
-        {
-            'cidade': 'Minas Morgul',
-            'centroDist': 'nazgul',
-            'id': 1203
-        },
-        {
-            'cidade': 'O condado',
-            'centroDist': 'hobbit',
-            'id': 12314
-        },
-        {
-            'cidade': 'Mordor',
-            'centroDist': 'Cavalo',
-            'id': 12314
-        }
-    ]
-
     useEffect(() => {
         console.log("Page changed to", currentPage);
-        setData(fakeData);
         axios.get(`/transportadora?page=${currentPage}`).then((response) => {
             console.log(response.data[0]);
             setData(response.data[0])
         });
-    }, [currentPage]);
+    }, [currentPage, updateTable]);
 
     function Items({ currentItems }) {
         // currentItems = currentItems.slice(1, currentItems.length);
@@ -82,7 +127,8 @@ export default function TransporterRegister(props) {
                     <table className={'history-table'}>
                         <thead>
                         <tr className={'table-row-header'}>
-                            <th>Cidade</th> <th>Ações</th>
+                            <th>Cidade</th>
+                            {/*<th>Ações</th>*/}
                         </tr>
                         </thead>
                         <tbody>
@@ -160,6 +206,19 @@ export default function TransporterRegister(props) {
                     />
                 </div>
             </div>
+            <ToastContainer
+                position="bottom-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss={false}
+                draggable={false}
+                pauseOnHover
+                theme="colored"
+                transition: Bounce
+            />
         </div>
     )
 }

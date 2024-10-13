@@ -36,18 +36,17 @@ export default function BidScreen(props) {
     const handleCloseAddBid = ()=> setOpenAddBid(false)
 
     function buttonStatus(id){
-        console.log("Id current = ", id);
         setCurrentId(id);
     }
 
     const handlePageChange = (selectedPage) => {
-        console.log("Page selected: ", selectedPage.selected);
+        // console.log("Page selected: ", selectedPage.selected);
         setCurrentPage(selectedPage.selected);
     };
 
     useEffect(() => {
         axios.get(`/bid?page=${currentPage}`).then((response) => {
-            console.log(response.data);
+            // console.log(response.data);
             setData(response.data[0]);
         });
     }, [currentPage]);
@@ -85,11 +84,11 @@ export default function BidScreen(props) {
                     <tbody>
                     {currentItems.map((item, key) => (
                         <BidTableRow key={key} data={item} fillBidButton={function(){
-                            console.log("Fill Button pressed")
+                            // console.log("Fill Button pressed")
                             buttonStatus(item.id);
                             handleOpen();
                         }} detailBidButton={function(){
-                            console.log("Detail Bid pressed");
+                            // console.log("Detail Bid pressed");
                             buttonStatus(item.id);
                             handleOpenDetail();
                         }}/>

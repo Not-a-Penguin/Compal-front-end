@@ -6,7 +6,12 @@ import Box from "@mui/material/Box";
 import HistoryModalInput from "../history-components/history-modal/history-modal-input.jsx";
 import {Tab, TabList, TabPanel, Tabs} from "react-tabs";
 import BidDetailAccordion from "./bid-detail-accordion.jsx";
+import BidDetailAccordionTable from "./bid-detail-accordion-table.jsx";
 
+import axios from 'axios';
+import ModalDescription from "./modal-description.jsx";
+axios.defaults.baseURL = 'http://192.168.195.40:3333';
+axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
 const style = {
     position: 'absolute',
@@ -25,66 +30,26 @@ export default function BidDetailModal(props) {
 
     const [dadosBid, setDadosBid] = useState({});
 
-    useEffect(() => {
-        setDadosBid(
-            {
-                    "Seguro Transportadora":
-                        [
-                            {
-                                "nome": "Seguro 1",
-                                "seguros": [
-                                    {
-                                        "descricao": "Seguro 1 Descrição 1",
-                                        "porcentagem": "1%"
-                                    }
-                                ]
+    const [transportadora, setTransportadora] = useState('')
+    const [origem, setOrigem] = useState('')
+    const [destino, setDestino] = useState('')
+    const [modal, setModal] = useState('')
 
-                            },
-                            {
-                                "nome": "Seguro 2",
-                                "seguros": [
-                                    {
-                                        "descricao": "Seguro 2 Descrição 1",
-                                        "porcentagem": "3%"
-                                    },
-                                    {
-                                        "descricao": "Seguro 2 Descrição 2",
-                                        "porcentagem": "2%"
-                                    }
-                                ]
-                            }
-                        ],
-                    "Seguro Compal": [
-                        {
-                            "nome": "Seguro compal 1",
-                            "seguros": [
-                                {
-                                    "descricao": "Seguro compal 1 Descrição 1",
-                                    "porcentagem": "3%"
-                                },
-                                {
-                                    "descricao": "Seguro compal 1 Descrição 2",
-                                    "porcentagem": "2%"
-                                }
-                            ]
-                        },
-                        {
-                            "nome": "Seguro compal 2",
-                            "seguros": [
-                                {
-                                    "descricao": "Seguro compal 2 Descrição 1",
-                                    "porcentagem": "3%"
-                                },
-                                {
-                                    "descricao": "Seguro compal 2 Descrição 2",
-                                    "porcentagem": "2%"
-                                }
-                            ]
-                        }
-                    ]
-                }
-        )
-    },[])
+    useEffect(() => {
+
+       axios.get( `/detalhesbid/${props.id}`).then(function(response){
+
+           console.log(response.data)
+
+
+           setDadosBid(response.data)
+           setTransportadora(response.data['bid']['transportadora']['descricao'])
+           setOrigem(response.data['bid']['origem']['descricao'])
+           setDestino(response.data['bid']['destino']['descricao'])
+           setModal(response.data['bid']['tipoModal'])
+
+       })
+    },[props.handleOpen])
 
     return (
         <div>
@@ -103,19 +68,19 @@ export default function BidDetailModal(props) {
                     </div>
                     <div className={'modal-valid-body'}>
                         <div className={'modal-valid-body-aligner1'}>
-                            <HistoryModalInput title={"Transportadora"} value={""}/>
-                            <HistoryModalInput title={"Modal"} value={"R$"}/>
+                            <HistoryModalInput title={"Transportadora"} id={'detalhes-transportadora'} value={transportadora}/>
+                            <HistoryModalInput title={"Modal"} id={'detalhes-modal'} value={modal}/>
                         </div>
                         <div className={'modal-valid-body-aligner1'}>
-                            <HistoryModalInput title={"Origem"} value={""}/>
-                            <HistoryModalInput title={"Destino"} value={""}/>
+                            <HistoryModalInput title={"Origem"} id={'detalhes-origem'} value={origem} />
+                            <HistoryModalInput title={"Destino"} id={'detalhes-destino'} value={destino} />
                         </div>
-                        {/*<div className={'modal-valid-body-aligner1'}>*/}
-                        {/*    <HistoryModalInput title={"Cliente"} value={"  "}/>*/}
-                        {/*    <div style={{visibility: 'hidden'}}>*/}
-                        {/*        <HistoryModalInput title={"Invisible"}/>*/}
-                        {/*    </div>*/}
-                        {/*</div>*/}
+                        <div className={'modal-valid-body-aligner1'}>
+                            <HistoryModalInput title={"Modal"} value={modal}/>
+                            <div style={{visibility: 'hidden'}}>
+                                <HistoryModalInput title={"Invisible"}/>
+                            </div>
+                        </div>
                     </div>
 
                     <div style={{marginTop: '20px', height: '50vh', overflowY: 'auto'}}>
@@ -141,31 +106,28 @@ export default function BidDetailModal(props) {
                                         Frete Peso
                                     </div>
                                 </Tab>
-                                <Tab>
-                                    <div className={'modal-tab-title'}>
-                                        Modal
-                                    </div>
-                                </Tab>
+                                {/*<Tab>*/}
+                                {/*    <div className={'modal-tab-title'}>*/}
+                                {/*        Modal*/}
+                                {/*    </div>*/}
+                                {/*</Tab>*/}
                             </TabList>
                             <TabPanel>
-                                {/*Seguro Transportadora*/}
-                                {/*{dadosBid ? <HistoryModalAccordion data={dadosBid}/> :*/}
-                                {dadosBid ? <BidDetailAccordion data={dadosBid["Seguro Transportadora"]}/> : <div></div>}
-                                {/*    <div></div>}*/}
+                                {dadosBid ? <BidDetailAccordionTable data={dadosBid["segurosTransportadora"]}/> : <div></div>}
                             </TabPanel>
                             <TabPanel>
                             {/* Seguro Compal*/}
-                                {dadosBid ? <BidDetailAccordion data={dadosBid["Seguro Compal"]}/> : <div></div>}
+                                {dadosBid ? <BidDetailAccordionTable data={dadosBid["segurosCompal"]}/> : <div></div>}
                             </TabPanel>
                             <TabPanel>
-                                Outros
+                                {dadosBid ? <BidDetailAccordionTable data={dadosBid["outros"]}/> : <div></div>}
                             </TabPanel>
                             <TabPanel>
-                                Frete Peso
+                                {dadosBid ? <BidDetailAccordionTable data={dadosBid["fretes"]} fretes={true}/> : <div></div>}
                             </TabPanel>
-                            <TabPanel>
-                                Modal
-                            </TabPanel>
+                            {/*<TabPanel>*/}
+                            {/*    {dadosBid ? <ModalDescription description={dadosBid['bid']['tipoModal']}/> : <div></div>}*/}
+                            {/*</TabPanel>*/}
                         </Tabs>
                     </div>
                 </Box>
